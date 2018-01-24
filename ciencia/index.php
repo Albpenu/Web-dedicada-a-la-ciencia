@@ -13,9 +13,11 @@
 </head>
 <body onload="horario()" style="background-size: 150% 150%; background-attachment: fixed; background-position: cover; min-width: 400px;">
 
-  <video autoplay="autoplay" loop="loop" id="fondo" preload="auto"/>
-    <source src="https://i.imgur.com/W1GEO9G.mp4" type="video/mp4" />
-  </video/>
+  <div class="fullscreen-bg">
+    <video loop muted autoplay id="fondo" class="fullscreen-bg__video"/>
+      <source src="https://i.imgur.com/W1GEO9G.mp4" type="video/mp4" />
+    </video/>
+  </div>
 
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
@@ -28,7 +30,7 @@
     echo "<p id='hora'></p>";
 
   ?>
-    <div id="imglogo" align="center" >
+    <div id="imglogo" align="center">
     	<img id="logo" src="https://media1.giphy.com/media/pZGDZwmxOtEEo/giphy.gif" />
     </div>
 
@@ -46,6 +48,14 @@
 	<aside></aside>
 	<aside></aside>
 	<script type="text/javascript">
+    document.getElementById("formu").style("display", "none");
+    $("#menu").click(function(){
+      if (document.getElementById("formu").style("display", "none")) {
+        document.getElementById("formu").style("display", "block");
+      } else {
+
+      }
+    }
 
     function horario() {
       var today = new Date();
