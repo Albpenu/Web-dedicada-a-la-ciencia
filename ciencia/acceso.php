@@ -10,13 +10,13 @@
     session_cache_limiter('public');
     session_start();
     // Consultas
-    $correo=mysqli_query($connect, "SELECT correo FROM usuario WHERE correo='$email';");
-    $comprobar_correo= mysqli_fetch_array($correo);
+    $correo=mysqli_query($connect, "SELECT email FROM usuario WHERE email='$email';");
+    $comprobar_correo= mysqli_fetch_array($email);
     /*$alias= mysqli_query($connect, "SELECT alias FROM usuario c JOIN usuario u ON c.id_usuario=u.id WHERE u.correo='$email' AND u.contrasenia='$pass';") or die(mysqli_error($connect));*/
-    $alias= mysqli_query($connect, "SELECT alias FROM usuario c JOIN usuario u ON c.id_usuario=u.id WHERE u.correo='$email' AND u.contrasenia='$pass';") or die(mysqli_error($connect));
+    $alias= mysqli_query($connect, "SELECT alias FROM usuarios u WHERE u.email='$email' AND u.contrasenia='$contrasenia';") or die(mysqli_error($connect));
     $usuario= mysqli_fetch_array($alias);
 
-    $password=mysqli_query($connect, "SELECT contrasenia FROM usuario WHERE contrasenia='$pass';");
+    $password=mysqli_query($connect, "SELECT contrasenia FROM usuarios WHERE contrasenia='$pass';");
     $comprobar_pass= mysqli_fetch_array($password);
     
 //Acceso de administrador:
@@ -29,15 +29,15 @@
 			if (empty($_POST['email']) || empty($_POST['password'])) {
 				
 			}else{
-				if ($_POST['email'] == "nenanu2015@gmail.com") {
-					if ($_POST['password'] == "2901") {
+				if ($_POST['email'] == "albpenu@gmail.com") {
+					if ($_POST['password'] == "1234") {
 						
 						if ($_POST['remember'] == "rememberYES") {
 							setcookie("emailU", $_POST['email'], time()+157680000);
 							setcookie("passU", $_POST['password'], time()+157680000);
 						}
 						$_SESSION['email'] = $_POST['email'];
-						echo "<script>alert('¡BIENVENIDA, MADRE!');</script>";
+						echo "<script>alert('¡BIENVENIDA, ADMINISTRADOR!');</script>";
 						echo "<script>window.location = 'admin.php';</script>";
 					}else{
 						echo "<script>alert('Contraseña INCORRECTA');</script>";

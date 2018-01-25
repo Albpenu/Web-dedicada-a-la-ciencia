@@ -3,15 +3,11 @@
     box-sizing: border-box;
 }
 
-#imglogo {
-    position: relative;
-    border-radius: 100%;
-}
-
 img#logo {
     width: 450px;
     display: block;
     margin: -5px auto;
+    border-radius: 100%;
 }
 
 body {

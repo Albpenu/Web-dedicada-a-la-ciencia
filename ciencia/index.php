@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,17 +26,17 @@
   <?php
 
     $fecha = date('d/m/Y');
-    echo $fecha;
-    echo "<p id='hora'></p>";
+    echo "<p style='color: white;'>".$fecha.", <label id='hora'></label></p>";
 
   ?>
-    <div id="imglogo" align="center">
+    <div id="imglogo" align="center" style="cursor: pointer;">
     	<img id="logo" src="https://media1.giphy.com/media/pZGDZwmxOtEEo/giphy.gif" />
     </div>
-
+    
     <!-- Formulario de acceso-->
-	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/icon11.png'); background-position: center; background-size: 100%; border-radius: 15px; text-align: center;" align="center">
-        <h1><u>Acceso</u>:</h1>
+	<form id="formu" name="form" action="acceso.php" method="post" style="background: rgba(0, 0, 0, 0) url(&quot;rsc/img/icon11.png&quot;) repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
+      <a href="javascript:cerrarAcc()" style="float: right; padding-right: 5px; font-family: 'mejor'; color: black">x</a>
+      <h1 style="margin-top: 5px; font-family: 'mejor';"><u>Acceso</u>:</h1>
 	    <input style="width: 125px" placeholder="Correo" required name="email" type="email" value="" style="" /><br>
 	    <input style="width: 125px" placeholder="Contraseña" required name="password" type="password" value=""/><br>
         <input name="remember" type="checkbox" value="rememberYES"><label style="color: gold;">Recuérdame</label><br>
@@ -48,13 +48,23 @@
 	<aside></aside>
 	<aside></aside>
 	<script type="text/javascript">
-    document.getElementById("formu").style("display", "none");
-    $("#menu").click(function(){
-      if (document.getElementById("formu").style("display", "none")) {
-        document.getElementById("formu").style("display", "block");
-      } else {
+    $("#formu").hide();
 
-      }
+    $("#imglogo").click(function(){
+        $("#formu").toggle();
+    });
+
+    function formato(i) {
+        if (i < 10) {i = "0" + i};
+        return i;
+    }
+
+    document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
+    /*document.getElementById("usuario").innerHTML = '<?php session_start(); echo $_SESSION['alias']." "; echo $_SESSION['imagenperfil']; ?>';*/
+
+    function cerrarAcc(){
+      document.getElementById("formu").style.display = "none";
+       return;
     }
 
     function horario() {
@@ -68,15 +78,8 @@
       var t = setTimeout(horario, 500);
     }
 
-    function formato(i) {
-        if (i < 10) {i = "0" + i};
-        return i;
-    }
 
-  document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
-  document.getElementById("usuario").innerHTML = '<?php session_start(); echo $_SESSION['cliente']; ?>';
-
-  document.getElementById("formu").nextElementSibling.innerHTML = "<ul align='center'><li><a href='index.php?<?php echo htmlspecialchars(SID); ?>'><img class='option' src='rsc/img/house.png' /></a></li><li><img class='option' src='rsc/img/list.png' onclick='secciones()'/></li><li><img class='option' onclick='formulario()' src='rsc/img/userpassword.png' /></li><br><div  id='seccion'><li><a href='catlibros.php?<?php echo htmlspecialchars(SID); ?>'><img class='option' src='rsc/img/catlibros.png' /></a></li><li><a href='catbolis.php'><img class='option' src='rsc/img/pen.png' /></a></li></div></ul>";
+  /*document.getElementById("formu").nextElementSibling.innerHTML = "<ul align='center'><li><a href='index.php?<?php echo htmlspecialchars(SID); ?>'><img class='option' src='rsc/img/house.png' /></a></li><li><img class='option' src='rsc/img/list.png' onclick='secciones()'/></li><li><img class='option' onclick='formulario()' src='rsc/img/userpassword.png' /></li><br><div  id='seccion'><li><a href='catlibros.php?<?php echo htmlspecialchars(SID); ?>'><img class='option' src='rsc/img/' /></a></li><li><a href='.php'><img class='option' src='rsc/img/' /></a></li></div></ul>";
   document.getElementById("seccion").style.display = "none";
   document.getElementById("formu").style.display = "none";
   function secciones() {
@@ -96,6 +99,7 @@
           form.style.display = "none";
       }
   }
+  */
         
   function showHidePass() {
       var password = document.getElementById("pass");
