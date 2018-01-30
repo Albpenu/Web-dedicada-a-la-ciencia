@@ -29,7 +29,7 @@
 			if (empty($_POST['email']) || empty($_POST['password'])) {
 				
 			}else{
-				if ($_POST['email'] == "albpenu@gmail.com") {
+				if ($_POST['email'] == "albpenu3110@gmail.com") {
 					if ($_POST['password'] == "1234") {
 						
 						if ($_POST['remember'] == "rememberYES") {
@@ -37,7 +37,7 @@
 							setcookie("passU", $_POST['password'], time()+157680000);
 						}
 						$_SESSION['email'] = $_POST['email'];
-						echo "<script>alert('¡BIENVENIDA, ADMINISTRADOR!');</script>";
+						echo "<script>alert('¡BIENVENIDO, ADMINISTRADOR!');</script>";
 						echo "<script>window.location = 'admin.php';</script>";
 					}else{
 						echo "<script>alert('Contraseña INCORRECTA');</script>";

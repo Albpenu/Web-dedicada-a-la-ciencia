@@ -7,17 +7,17 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Culto a la ciencia</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
 </head>
-<body onload="horario()" style="background-size: 150% 150%; background-attachment: fixed; background-position: cover; min-width: 400px;">
+<body onload="horario()">
 
-  <div class="fullscreen-bg">
+  <!--<div class="fullscreen-bg">
     <video loop muted autoplay id="fondo" class="fullscreen-bg__video"/>
       <source src="https://i.imgur.com/W1GEO9G.mp4" type="video/mp4" />
     </video/>
-  </div>
+  </div>-->
 
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
@@ -29,13 +29,13 @@
     echo "<p style='color: white;'>".$fecha.", <label id='hora'></label></p>";
 
   ?>
-    <div id="imglogo" align="center" style="cursor: pointer;">
+    <div id="imglogo" align="center">
     	<img id="logo" src="https://media1.giphy.com/media/pZGDZwmxOtEEo/giphy.gif" />
     </div>
     
     <!-- Formulario de acceso-->
-	<form id="formu" name="form" action="acceso.php" method="post" style="background: rgba(0, 0, 0, 0) url(&quot;rsc/img/icon11.png&quot;) repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
-      <a href="javascript:cerrarAcc()" style="float: right; padding-right: 5px; font-family: 'mejor'; color: black">x</a>
+	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/icon11.png') repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
+      <a href="javascript:cerrarAcc()" style="float: right; font-family: 'mejor'; color: black; text-decoration: none; background-color: white; border-radius: 50%; width: 15px">X</a>
       <h1 style="margin-top: 5px; font-family: 'mejor';"><u>Acceso</u>:</h1>
 	    <input style="width: 125px" placeholder="Correo" required name="email" type="email" value="" style="" /><br>
 	    <input style="width: 125px" placeholder="Contraseña" required name="password" type="password" value=""/><br>
