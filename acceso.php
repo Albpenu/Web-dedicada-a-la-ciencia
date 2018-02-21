@@ -27,6 +27,9 @@
 
 	    $password=mysqli_query($connect, "SELECT contrasenia FROM usuarios WHERE contrasenia='$pass';");
 	    $comprobar_pass= mysqli_fetch_array($password);
+
+	    $img=mysqli_query($connect, "SELECT imagendeperfil FROM usuarios WHERE imagendeperfil='$imagen';");
+	    $comprobar_img= mysqli_fetch_array($img);
 		
 		if (isset($_COOKIE['emailU'])) {
 			$_SESSION['email'] = $_COOKIE['emailU'];
@@ -54,10 +57,10 @@
 							echo "<script>alert('Contraseña INCORRECTA');</script>";
 							echo "<script>window.location = 'index.php'</script>";
 						}
-					} elseif ($email == $comprobar_correo[0]) {
+					} elseif ($email == $comprobar_correo['email']) {
 						//Acceso de usuarios:
 
-					      if ($pass == $comprobar_pass[0]) {
+					      if ($pass == $comprobar_pass['contrasenia']) {
 
 						      if ($_POST['remember'] && !empty($_POST['remember'])) {
 						        setcookie("emailU", $_POST['email'], time()+157680000);
@@ -71,7 +74,7 @@
 						      
 						      ?>
 						      <script type="text/javascript">
-						      	document.getElementById("usuario").innerHTML = '<?php echo $_SESSION['imagenperfil']." ".$_SESSION['usuario']; ?>';
+						      	document.getElementById("usuario").innerHTML = '<?php echo $_SESSION['usuario']; ?>';
 						      	
 						      	document.getElementById('salir').innerHTML = 'Salir';
 						      </script>

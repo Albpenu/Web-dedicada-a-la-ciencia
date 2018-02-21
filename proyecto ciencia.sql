@@ -1,9 +1,13 @@
 CREATE DATABASE ciencia;
 USE ciencia;
 
-CREATE TABLE usuarios (id_usuario INT not null auto_increment, alias VARCHAR(40), contraseña varchar(20), 
-email varchar(50), fecha_alta datetime, sabiduria varchar(25), primary key 
+CREATE TABLE usuarios (id_usuario INT not null auto_increment, alias VARCHAR(40), 
+email varchar(50), contrasenia varchar(50) NOT NULL, fecha_alta datetime, sabiduria varchar(25), primary key 
 (id_usuario));
+
+DROP TABLE usuarios;
+
+ALTER TABLE usuarios ADD imagendeperfil blob;
 
 CREATE TABLE posts (id_post INT NOT NULL, id_subcategoria INT, id_usuario INT, 
 titulo varchar(50), contenido varchar(50), imagen blob, video blob, 
@@ -19,12 +23,18 @@ varchar(50), descripcion varchar(200), fecha_ultima_actualizacion DATE,
 foreign key (id_categoria) references categorias(id_categoria),  
 primary key (id_subcategoria));
 
+ALTER table categorias change titulo nombre_categoria varchar(50);
+ALTER table subcategorias change titulo nombre_subcategoria varchar(50);
+
 CREATE TABLE categorias (id_categoria INT not NULL, titulo varchar(50), 
 descripcion varchar(200), fecha_ultima_actualizacion datetime, 
 primary key (id_categoria));
 
-SELECT * from usuarios WHERE contrasenia=MD5("med32654") and email='asdf@gmail.com';
+SELECT * FROM usuarios WHERE contrasenia = MD5('med32654');
 SELECT contrasenia FROM usuarios WHERE contrasenia=MD5('1234');
+SELECT * from usuarios;
+SELECT * from categorias;
+SELECT * from subcategorias;
 SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE table usuarios;
 SET FOREIGN_KEY_CHECKS=1;
@@ -32,4 +42,3 @@ SET FOREIGN_KEY_CHECKS=1;
 ALTER TABLE usuarios change contraseña contrasenia varchar(20);
 SELECT * from usuarios;
 */
-

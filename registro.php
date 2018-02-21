@@ -10,17 +10,17 @@
 
 <body style="background-image: url('rsc/img/fondo.png'); background-repeat: no-repeat; background-size: cover;">
     <!-- Formulario de registro-->
-	<form name="form" action="registro_db.php" method="post">
-        <fieldset style="width: 40%">
-            <legend><h1><u>Registro:</u></h1></legend>
-            <input placeholder="Elija un alias" name="alias" type="text" value=""/><br><br>
-            <strong>Elija su imagen de avatar: </strong><input type="file" name="imagenperfil"><br><br>
-    	    <input placeholder="Introduzca su dirección de correo electrónico" style="width: 270px;" name="email" type="email" value=""/><br><br>
-    	    <input placeholder="Introduzca una contraseña" name="password" style="width: 160px;" type="password" id="pass" value=""/> <input type="checkbox" name="comprobar" id="checkpass" onclick="showHidePass()"/><b>Mostrar contraseña</b><br><br>
-            <input type="password" style="width: 160px;" name="rpass" id="rpass" class="form-control" required placeholder="Repita su contraseña" /><br><br>
-            <input style="float: right;" type="submit" name="registro" value="Registrarse"/>
-        </fieldset>
-	</form>
+    	<form name="form" action="registro_db.php" method="post">
+            <fieldset style="width: 40%">
+                <legend><h1><u>Registro:</u></h1></legend>
+                <input placeholder="Elija un alias" name="alias" type="text" value=""/><br><br>
+                <strong>Elija su imagen de avatar: </strong><input type="file" name="imagenperfil"><br><br>
+        	    <input placeholder="Introduzca su dirección de correo electrónico" style="width: 270px;" name="email" type="email" value=""/><br><br>
+        	    <input placeholder="Introduzca una contraseña" name="password" style="width: 160px;" type="password" id="pass" value=""/> <input type="checkbox" name="comprobar" id="checkpass" onclick="showHidePass()"/><b>Mostrar contraseña</b><br><br>
+                <input type="password" style="width: 160px;" name="rpass" id="rpass" class="form-control" required placeholder="Repita su contraseña" /><br><br>
+                <input style="float: right;" type="submit" name="registro" value="Registrarse"/>
+            </fieldset>
+    	</form>
 
     <script type="text/javascript">
         function showHidePass(){

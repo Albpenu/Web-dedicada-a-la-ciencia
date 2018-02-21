@@ -19,7 +19,7 @@
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
-  <span style="top: 5; right: 5; float: right; position: absolute; padding: 20px"><a href='cerrarsesion.php' title='Cerrar sesión' id="salir"></a></span>
+  <span style="float: right; padding-top: 10px"><a href='cerrarsesion.php' title='Cerrar sesión' id="salir">Salir</a></span>
   <?php
 
     $fecha = date('d/m/Y');
