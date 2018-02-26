@@ -1,6 +1,8 @@
-insert into categorias values (NULL, 'Aspirante a investigador', 'Para usuarios iniciados en esto de las movidas científicas');
-insert into categorias values (NULL, 'Investigador auxiliar', 'Para usuarios que pilotan de ciencia');
-insert into categorias values (NULL, 'Investigador titular', 'Sólo apta para usuarios duchos, sabios o eminentes; incluso pedantes ;)');
+insert into categorias values ('', 'Aspirante a investigador', 'Para usuarios iniciados en esto de las movidas científicas',now());
+insert into categorias values ('', 'Investigador auxiliar', 'Para usuarios que pilotan de ciencia',now());
+insert into categorias values ('', 'Investigador titular', 'Sólo apta para usuarios duchos, sabios o eminentes; incluso pedantes ;)',now());
+
+truncate categorias;
 
 /*insert into usuarios values (NULL, 'Hawking1996', md5('1234'), '');
 insert into usuarios values (NULL, 'TeslaCharger98', 'Usuario  ciencia');

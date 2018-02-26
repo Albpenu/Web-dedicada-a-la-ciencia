@@ -52,7 +52,7 @@
 	<?php
 		if (mysqli_num_rows($resultado)>0) {
 		    while($valor = mysqli_fetch_assoc($resultado)) {
-		        echo utf8_encode("<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" . $valor["alias"]. "</td><td align='center'>" . $valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" . $valor["fecha_alta"]. "</td><td align='center'>" . $valor["sabiduria"]. "</td><td align='center'>" . $valor["imagendeperfil"]. "</td></tr>");
+		        echo utf8_encode("<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .utf8_encode($valor["alias"]). "</td><td align='center'>" .$valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" .$valor["fecha_alta"]. "</td><td align='center'>" .utf8_encode($valor["sabiduria"]). "</td><td align='center'>" .$valor["imagendeperfil"]. "</td></tr>");
 		    }
 		} else {
 		    echo "<tr><td colspan='7' align='center'>0 resultados</td></tr>";
@@ -84,7 +84,7 @@
 		<?php
 			if (mysqli_num_rows($resultado)>0) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<tr><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" . utf8_encode($valor["nombre_categoria"]). "</td><td align='center'>".$valor["descripcion"]. "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
+			        echo "<tr><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" .utf8_encode($valor["nombre_categoria"]). "</td><td align='center'>".utf8_encode($valor["descripcion"]). "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>0 resultados</td></tr>";
@@ -115,7 +115,7 @@
 		<?php
 			if (mysqli_num_rows($resultado)>0) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<tr><td align='center'>".$valor["id_subcategoria"]. "</td><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" . utf8_encode($valor["nombre_subcategoria"]). "</td><td align='center'>".$valor["descripcion"]. "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
+			        echo "<tr><td align='center'>".$valor["id_subcategoria"]. "</td><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" . utf8_encode($valor["nombre_subcategoria"]). "</td><td align='center'>".utf8_encode($valor["descripcion"]). "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='5' align='center'>0 resultados</td></tr>";

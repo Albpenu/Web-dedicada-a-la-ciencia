@@ -8,17 +8,22 @@
 
 	<?php
 	//Acceso usuarios registrados
-	// Prevenir inyecciones a la base de datos
+
 	    error_reporting(E_ALL ^ E_NOTICE);
 
 	    $email = $_POST['email'];
 	    $pass = md5($_POST['password']);
-	    $imagen = $_POST['imagenperfil'];
-
-	    include("conexion.php");
+	    // Consultas
+	    
+	  
+		include("conexion.php");
 	    // Inicio de variable de sesión
 	    session_start();
-	    // Consultas
+
+	    $imagen = mysqli_query($connect, "SELECT imagendeperfil FROM usuarios u WHERE u.email='$email' AND u.contrasenia='$pass';");
+
+	    $imagen2 = mysqli_fetch_array($imagen);
+
 	    $correo=mysqli_query($connect, "SELECT email FROM usuarios WHERE email='$email';");
 	    $comprobar_correo= mysqli_fetch_array($correo);
 
@@ -27,10 +32,7 @@
 
 	    $password=mysqli_query($connect, "SELECT contrasenia FROM usuarios WHERE contrasenia='$pass';");
 	    $comprobar_pass= mysqli_fetch_array($password);
-
-	    $img=mysqli_query($connect, "SELECT imagendeperfil FROM usuarios WHERE imagendeperfil='$imagen';");
-	    $comprobar_img= mysqli_fetch_array($img);
-		
+	    
 		if (isset($_COOKIE['emailU'])) {
 			$_SESSION['email'] = $_COOKIE['emailU'];
 			header('location: index.php');
@@ -68,14 +70,18 @@
 						      }
 						      	$_SESSION['email'] = $_POST['email'];
 						      	$_SESSION['usuario'] = $usuario['alias'];
+						      	$_SESSION['imagendeperfil'] = $imagen2['imagendeperfil'];
 						      	include('conexion.php');
 	   							echo '<script>alert("¡BIENVENID@, '.$_SESSION['usuario'].'!")</script>';
+	   							
 	   						    echo "Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a>";
 						      
 						      ?>
 						      <script type="text/javascript">
-						      	document.getElementById("usuario").innerHTML = '<?php echo $_SESSION['usuario']; ?>';
 						      	
+						      	document.getElementById("usuario").innerHTML = '<?php echo $_SESSION['usuario']; ?>';
+
+
 						      	document.getElementById('salir').innerHTML = 'Salir';
 						      </script>
 							<?php

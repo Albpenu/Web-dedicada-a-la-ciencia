@@ -2,23 +2,23 @@ CREATE DATABASE ciencia;
 USE ciencia;
 
 CREATE TABLE usuarios (id_usuario INT not null auto_increment, alias VARCHAR(40), 
-email varchar(50), contrasenia varchar(50) NOT NULL, fecha_alta datetime, sabiduria varchar(25), primary key 
+email varchar(50), contrasenia varchar(50) NOT NULL, imagendeperfil BLOB, fecha_alta datetime, sabiduria varchar(25), primary key 
 (id_usuario));
 
-DROP TABLE usuarios;
+DROP TABLE votos;
 
-ALTER TABLE usuarios ADD imagendeperfil blob;
+ALTER TABLE usuarios DROP imagendeperfil;
 
-CREATE TABLE posts (id_post INT NOT NULL, id_subcategoria INT, id_usuario INT, 
+CREATE TABLE posts (id_post INT NOT NULL auto_increment, id_subcategoria INT, id_usuario INT, 
 titulo varchar(50), contenido varchar(50), imagen blob, video blob, 
 fecha_subida DATE, primary key (id_post), 
 foreign key (id_usuario) references usuarios(id_usuario),
 foreign key (id_subcategoria) references subcategorias(id_subcategoria));
 
-CREATE TABLE votos (id_voto INT not null, valor boolean, id_usuario INT, 
+CREATE TABLE votos (id_voto INT not null auto_increment, valor boolean, id_usuario INT, 
 foreign key (id_usuario) references usuarios(id_usuario), primary key (id_voto));
 
-CREATE TABLE subcategorias (id_subcategoria INT not null, id_categoria INT, titulo 
+CREATE TABLE subcategorias (id_subcategoria INT not null auto_increment, id_categoria INT, titulo 
 varchar(50), descripcion varchar(200), fecha_ultima_actualizacion DATE, 
 foreign key (id_categoria) references categorias(id_categoria),  
 primary key (id_subcategoria));
@@ -26,7 +26,7 @@ primary key (id_subcategoria));
 ALTER table categorias change titulo nombre_categoria varchar(50);
 ALTER table subcategorias change titulo nombre_subcategoria varchar(50);
 
-CREATE TABLE categorias (id_categoria INT not NULL, titulo varchar(50), 
+CREATE TABLE categorias (id_categoria INT not NULL auto_increment, titulo varchar(50), 
 descripcion varchar(200), fecha_ultima_actualizacion datetime, 
 primary key (id_categoria));
 
@@ -42,3 +42,12 @@ SET FOREIGN_KEY_CHECKS=1;
 ALTER TABLE usuarios change contraseña contrasenia varchar(20);
 SELECT * from usuarios;
 */
+CREATE TABLE  `imagen_de_perfil` (
+`id_imagen` int(11) NOT NULL auto_increment, id_usuario INT,
+`nombre` varchar(100) default NULL,
+`tamanio` int(11) default NULL,
+`tipo` varchar(20) default NULL,
+`contenido` blob,
+PRIMARY KEY  (`id_imagen`),
+foreign key (id_usuario) references usuarios(id_usuario)
+);

@@ -19,7 +19,16 @@
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
-  <span style="float: right; padding-top: 10px"><a href='cerrarsesion.php' title='Cerrar sesión' id="salir">Salir</a></span>
+  <span style="float: right; padding-top: 10px">
+  <div id="imgperfil">
+    <?php
+    if (isset($_SESSION['usuario'])) {
+      echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+    }
+     
+    ?>
+  </div>
+  <a href='cerrarsesion.php' title='Cerrar sesión' id="salir">Salir</a></span>
   <?php
 
     $fecha = date('d/m/Y');
@@ -35,13 +44,13 @@
   ?>
 
     <!-- Formulario de acceso-->
-	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/NPL-Page-Cinemagraph-1.gif') repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
+	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/accesofinal.gif') repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
       <a href="javascript:cerrarAcc()" style="float: right; font-family: 'mejor'; color: black; text-decoration: none; background-color: white; border-radius: 50%; width: 15px">X</a>
       <h1 style="margin-top: 5px; font-family: 'mejor'; font-size: 60px">Acceso:</h1>
-	    <input style="width: 80%; font-size: 30px" placeholder="Correo" required name="email" type="email" value="" style="" /><br><br>
-	    <input style="width: 80%; font-size: 30px" placeholder="Contraseña" required name="password" type="password" value=""/><br>
-        <input name="remember" type="checkbox" value="rememberYES"><label style="color: gold; font-size: 40px">Recuérdame</label><br>
-        <input type="submit" style="font-size: 40px" name="enviar" value="Entrar"/><br>
+	    <input style="background-color: transparent; width: 80%; font-size: 30px" placeholder="Correo" required name="email" type="email" value="" style="" /><br><br>
+	    <input style="background-color: transparent; width: 80%; font-size: 30px" placeholder="Contraseña" required name="password" type="password" value=""/><br>
+        <input name="remember" type="checkbox" value="rememberYES"><label style="color: blue; font-size: 40px">Recuérdame</label><br>
+        <input type="submit" style="background-color: transparent; font-size: 40px" name="enviar" value="Entrar"/><br>
         <a style="font-size: 30px" href="registro.php">¿No estás registrado?</a><br>
         <a style="font-size: 30px" href="olvidado.php">¿Has olvidado tu contraseña?</a>
 	</form>
