@@ -74,14 +74,10 @@
 						      	include('conexion.php');
 	   							echo '<script>alert("¡BIENVENID@, '.$_SESSION['usuario'].'!")</script>';
 	   							
-	   						    echo "Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a>";
+	   						    echo "Volvamos a casa:<br> <a href='categorias.php'><img class='option' src='rsc/img/house.png' /></a>";
 						      
 						      ?>
 						      <script type="text/javascript">
-						      	
-						      	document.getElementById("usuario").innerHTML = '<?php echo $_SESSION['usuario']; ?>';
-
-
 						      	document.getElementById('salir').innerHTML = 'Salir';
 						      </script>
 							<?php

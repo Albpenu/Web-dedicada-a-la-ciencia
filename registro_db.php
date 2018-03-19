@@ -14,8 +14,12 @@
         $email = $_POST['email'];
         $contra = md5($_POST['password']);
         $repcontra = md5($_POST['rpass']);
+
+        //$_SESSION["nombreimg"] = $_FILES['imagenperfil']['name'];
         $_SESSION["img"] = $_FILES["imagenperfil"]["tmp_name"];
         $img = addslashes(file_get_contents($_SESSION["img"]));
+
+
         $comprobaremail = mysqli_query($connect, "SELECT * FROM usuarios WHERE email='$email'");
         $comprobar_email = mysqli_num_rows($comprobaremail);
 

@@ -1,6 +1,6 @@
 insert into categorias values ('', 'Aspirante a investigador', 'Para usuarios iniciados en esto de las movidas científicas',now());
 insert into categorias values ('', 'Investigador auxiliar', 'Para usuarios que pilotan de ciencia',now());
-insert into categorias values ('', 'Investigador titular', 'Sólo apta para usuarios duchos, sabios o eminentes; incluso pedantes ;)',now());
+insert into categorias values ('', 'Investigador titular', 'Sólo apta para usuarios duchos, sabios o eminentes; incluso pedantes ;)',now());	
 
 truncate categorias;
 

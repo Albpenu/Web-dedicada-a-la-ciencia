@@ -7,7 +7,11 @@ email varchar(50), contrasenia varchar(50) NOT NULL, imagendeperfil BLOB, fecha_
 
 DROP TABLE votos;
 
+DROP TABLE imagen_de_perfil;
+
 ALTER TABLE usuarios DROP imagendeperfil;
+
+ALTER TABLE usuarios ADD imagendeperfil BLOB;
 
 CREATE TABLE posts (id_post INT NOT NULL auto_increment, id_subcategoria INT, id_usuario INT, 
 titulo varchar(50), contenido varchar(50), imagen blob, video blob, 

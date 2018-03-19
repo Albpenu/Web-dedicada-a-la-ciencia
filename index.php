@@ -19,16 +19,21 @@
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
-  <span style="float: right; padding-top: 10px">
-  <div id="imgperfil">
+  
+  <div id="imgperfil" style="float: right;">
     <?php
+
     if (isset($_SESSION['usuario'])) {
+      //$extension = strtolower(substr($_SESSION["nombreimg"], strpos($_SESSION["nombreimg"], '.') + 1));
       echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
-    }
+      //echo '<img src="data:image/'.$extension.';base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+    } else {
+     }
      
     ?>
   </div>
-  <a href='cerrarsesion.php' title='Cerrar sesión' id="salir">Salir</a></span>
+  <span style="float: right; right: 0; padding: 0px; padding-top: 15px; clear: both;">
+  <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style="right: 0px">Salir</a></span>
   <?php
 
     $fecha = date('d/m/Y');
