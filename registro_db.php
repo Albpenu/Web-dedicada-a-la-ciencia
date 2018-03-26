@@ -34,7 +34,7 @@
                     echo '<script language="javascript">alert("Uy, este alias ya está designado, a ver sí vas a estar ya registrado...");</script> ';
                     echo '<script>history.back();</script>';
                 } else {
-                $consulta = mysqli_query($connect, "INSERT INTO usuarios (id_usuario, alias, contrasenia, email, fecha_alta, sabiduria, imagendeperfil) VALUES ('', '$alias', '$contra', '$email', NOW(), 'Sabe cositas', '$img')");
+                $consulta = mysqli_query($connect, "INSERT INTO usuarios (id_usuario, alias, contrasenia, email, fecha_alta, sabiduria, imagendeperfil) VALUES ('', '".utf8_encode($alias)."', '$contra', '$email', NOW(), 'Sabe cositas', '$img')");
 
                 //sabiduria: parece intelig, todo un sabio
 

@@ -37,10 +37,15 @@ primary key (id_categoria));
 SELECT * FROM usuarios WHERE contrasenia = MD5('med32654');
 SELECT contrasenia FROM usuarios WHERE contrasenia=MD5('1234');
 SELECT * from usuarios;
+
+UPDATE usuarios set alias='100tífico' where id_usuario=3;
+UPDATE usuarios set alias='100tífico2' where id_usuario=4;
+UPDATE usuarios set alias='100tífico3' where id_usuario=5;
+
 SELECT * from categorias;
 SELECT * from subcategorias;
 SET FOREIGN_KEY_CHECKS=0;
-TRUNCATE table usuarios;
+TRUNCATE table subcategorias;
 SET FOREIGN_KEY_CHECKS=1;
 /*DROP table ;
 ALTER TABLE usuarios change contraseña contrasenia varchar(20);

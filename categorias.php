@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	session_id();
-  	session_name();
-  	include('acceso.php');
+  session_name();
+  include('acceso.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +49,7 @@
 	 ?>
   	
   	<div style="clear: both;">
-  		<img style="cursor: pointer;" src="rsc/img/1.gif" id="imgcategoria1" width="500" alt="<?php 
+  		<img style="cursor: pointer;" src="rsc/img/1.gif" id="imgcategoria1" width="300" alt="<?php 
       $id1 = mysqli_fetch_assoc($nombreydesc1);
       echo utf8_encode($id1['nombre_categoria']);
       ?>">
@@ -59,7 +59,7 @@
   	</div>
 
   	<div>
-  		<img style="cursor: pointer; clear: both;" src="rsc/img/2.gif" id="imgcategoria2" width="500" alt="<?php 
+  		<img style="cursor: pointer; clear: both;" src="rsc/img/2.gif" id="imgcategoria2" width="300" alt="<?php 
       $id2 = mysqli_fetch_assoc($nombreydesc2);
       echo utf8_encode($id2['nombre_categoria']);
       ?>">	
@@ -69,7 +69,7 @@
   	</div>
 
   	<div>
-  		<img style="cursor: pointer; clear: both;" src="rsc/img/3.gif" id="imgcategoria3" width="500" alt="<?php 
+  		<img style="cursor: pointer; clear: both;" src="rsc/img/3.gif" id="imgcategoria3" width="300" alt="<?php 
       $id3 = mysqli_fetch_assoc($nombreydesc3);
       echo utf8_encode($id3['nombre_categoria']);
       ?>">	

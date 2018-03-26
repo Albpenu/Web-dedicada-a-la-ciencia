@@ -50,9 +50,10 @@
 			</thead>
 			<tbody>
 	<?php
+
 		if (mysqli_num_rows($resultado)>0) {
 		    while($valor = mysqli_fetch_assoc($resultado)) {
-		        echo utf8_encode("<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .utf8_encode($valor["alias"]). "</td><td align='center'>" .$valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" .$valor["fecha_alta"]. "</td><td align='center'>" .utf8_encode($valor["sabiduria"]). "</td><td align='center'>" .$valor["imagendeperfil"]. "</td></tr>");
+		        echo utf8_encode("<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .$valor["alias"]. "</td><td align='center'>" .$valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" .$valor["fecha_alta"]. "</td><td align='center'>" .utf8_encode($valor["sabiduria"]). "</td><td align='center'><img width='75' src='data:image/jpeg;base64," .base64_encode($valor["imagendeperfil"]). "'/></td></tr>");
 		    }
 		} else {
 		    echo "<tr><td colspan='7' align='center'>0 resultados</td></tr>";
@@ -92,6 +93,20 @@
 		?>
 				</tbody>
 			</table>
+	</div>
+
+	<!--Insertar subcategorías-->
+	<div style="float: left; margin-right: 10px; margin-top: 35px;">
+			<?php
+				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
+				$nombre2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
+				$nombre3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
+			?>
+			<h1>Insertar subcategoría:</h1>
+			<label>¿A qué categoría se la vas a añadir? Selecciónala:</label>
+			<br><input type="radio" name="categoria" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
 	</div>
 
 	<!--Subcategorías-->
@@ -145,6 +160,19 @@
         function remove(){
         	alert('Eliminado 😉👍');
         }
+
+        function catSelecc(categoria){
+        	var catselecc = categoria.value;
+
+        	if (catselecc == "<?php echo utf8_encode($idcat1['nombre_categoria']); ?>") {
+					console.log('Hola1');
+				} else if (catselecc == "<?php echo utf8_encode($idcat2['nombre_categoria']); ?>") {
+					console.log('Hola2');
+				} else if (catselecc == "<?php echo utf8_encode($idcat3['nombre_categoria']); ?>") {
+					console.log('Hola3');
+				} else {}
+        }
     </script>
 </body>
+
 </html>
