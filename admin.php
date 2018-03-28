@@ -2,12 +2,14 @@
 	include('conexion.php');
 	//$connect->query("SET NAMES 'utf8'");
 	echo "<div style='float: right; text-align: center'>Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a></div>";
+	session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Panel de administración</title>
 	<meta charset="utf-8">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
 	<style type="text/css">
 		tbody tr:nth-child(odd){
 		    background: #eac633;
@@ -62,8 +64,6 @@
 			</tbody>
 		</table>
 
-<div>
-
 	<!--Categorías-->
 	<div style="float: left; margin-right: 20px;">
 		<form name="form" action="admin_consultas.php" method="POST">
@@ -95,22 +95,8 @@
 			</table>
 	</div>
 
-	<!--Insertar subcategorías-->
-	<div style="float: left; margin-right: 10px; margin-top: 35px;">
-			<?php
-				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
-				$nombre2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
-				$nombre3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
-			?>
-			<h1>Insertar subcategoría:</h1>
-			<label>¿A qué categoría se la vas a añadir? Selecciónala:</label>
-			<br><input type="radio" name="categoria" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
-	</div>
-
 	<!--Subcategorías-->
-	<div style="float: left; margin-right: 10px; margin-top: 35px;">
+	<div style="float: left; margin-right: 20px;">
 		<form name="form" action="admin_consultas.php" method="POST">
 			<h1>Subcategorías:</h1>
 		</form>
@@ -139,7 +125,23 @@
 				</tbody>
 			</table>
 	</div>
-</div>
+
+	<!--Insertar subcategorías-->
+	<div style="float: left; clear: both;">
+			<?php
+				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
+				$nombre2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
+				$nombre3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
+			?>
+			<h1>Insertar subcategoría:</h1>
+			<label>¿A qué categoría se la vas a añadir? Selecciónala:</label>
+		<form action="admin_consultas.php" method="POST">
+			<br><input type="radio" name="categoria" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
+			<label id="subcat"></label>
+		</form>
+	</div>
 
 	<script type="text/javascript">
         function showHidePass(){
@@ -163,16 +165,12 @@
 
         function catSelecc(categoria){
         	var catselecc = categoria.value;
-
-        	if (catselecc == "<?php echo utf8_encode($idcat1['nombre_categoria']); ?>") {
-					console.log('Hola1');
-				} else if (catselecc == "<?php echo utf8_encode($idcat2['nombre_categoria']); ?>") {
-					console.log('Hola2');
-				} else if (catselecc == "<?php echo utf8_encode($idcat3['nombre_categoria']); ?>") {
-					console.log('Hola3');
-				} else {}
+        	document.getElementById('subcat').innerHTML = "<?php echo "<form name='form' action='admin_consultas.php' method='POST'><label>¿Qué nombre y descripción va a tener?</label><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' /><input name='desubcat' type='text' placeholder='Descripción' /><input type='submit' name='add2' value='Añadir'></form>"; ?>";
         }
+
     </script>
+    <?php
+    ?>
 </body>
 
 </html>
