@@ -1,9 +1,3 @@
-<?php
-	include('conexion.php');
-	//$connect->query("SET NAMES 'utf8'");
-	echo "<div style='float: right; text-align: center'>Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a></div>";
-	session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +15,17 @@
 	</style>
 </head>
 <body>
+	<?php
+		include('conexion.php');
+		//$connect->query("SET NAMES 'utf8'");
+		echo "<div style='float: right; text-align: center'>Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a></div>";
+		session_start();
+
+	    if(!isset($_SESSION['acceso'])) {
+	    	echo '<script>alert("¡Acceso restringido, genius!");</script>';
+	        die('<h1>¿Todavía sigues aquí? Vete a casita, anda</h1>');
+	    }
+	?>
 	<!--Usuarios-->
 	<form name="form" action="admin_consultas.php" method="POST">
 		<h1>Actualizar contraseña de usuario:</h1>
@@ -55,7 +60,7 @@
 
 		if (mysqli_num_rows($resultado)>0) {
 		    while($valor = mysqli_fetch_assoc($resultado)) {
-		        echo utf8_encode("<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .$valor["alias"]. "</td><td align='center'>" .$valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" .$valor["fecha_alta"]. "</td><td align='center'>" .utf8_encode($valor["sabiduria"]). "</td><td align='center'><img width='75' src='data:image/jpeg;base64," .base64_encode($valor["imagendeperfil"]). "'/></td></tr>");
+		        echo "<tr><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .$valor["alias"]. "</td><td align='center'>" .$valor["email"]. "</td><td align='center'>".$valor["contrasenia"]. "</td><td align='center'>" .$valor["fecha_alta"]. "</td><td align='center'>" .$valor["sabiduria"]. "</td><td align='center'><img width='75' src='data:image/jpeg;base64," .base64_encode($valor["imagendeperfil"]). "'/></td></tr>";
 		    }
 		} else {
 		    echo "<tr><td colspan='7' align='center'>0 resultados</td></tr>";
@@ -85,7 +90,7 @@
 		<?php
 			if (mysqli_num_rows($resultado)>0) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<tr><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" .utf8_encode($valor["nombre_categoria"]). "</td><td align='center'>".utf8_encode($valor["descripcion"]). "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
+			        echo "<tr><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" .$valor["nombre_categoria"]. "</td><td align='center'>".$valor["descripcion"]. "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>0 resultados</td></tr>";
@@ -106,20 +111,20 @@
 		?>
 			<table border="1px solid black" cellspacing="0">
 				<thead style="background-color: #4d8cf2;">
+					<th>Id de Categoría</th>
 					<th>Id de Subcategoría</th>
-					<th>Id de categoría</th>
-					<th>Nombre de la subcategoría</th>
+					<th>Nombre de la Subcategoría</th>
 					<th>Descripción</th>
 					<th>Fecha de la última actualización</th>
 				</thead>
 				<tbody>
 		<?php
-			if (mysqli_num_rows($resultado)>0) {
+			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<tr><td align='center'>".$valor["id_subcategoria"]. "</td><td align='center'>".$valor["id_categoria"]. "</td><td align='center'>" . utf8_encode($valor["nombre_subcategoria"]). "</td><td align='center'>".utf8_encode($valor["descripcion"]). "</td><td align='center'>".$valor["fecha_ultima_actualizacion"]. "</td></tr>";
+			        echo "<tr><td align='center'>".$valor["id_categoria"]."</td><td align='center'>".$valor["id_subcategoria"]."</td><td align='center'>".$valor["nombre_subcategoria"]."</td><td align='center'>".$valor["descripcion"]."</td><td align='center'>".$valor["fecha_ultima_actualizacion"]."</td></tr>";
 			    }
 			} else {
-			    echo "<tr><td colspan='5' align='center'>0 resultados</td></tr>";
+			    echo "<tr><td colspan='6' align='center'>0 resultados</td></tr>";
 			}
 		?>
 				</tbody>
@@ -165,7 +170,7 @@
 
         function catSelecc(categoria){
         	var catselecc = categoria.value;
-        	document.getElementById('subcat').innerHTML = "<?php echo "<form name='form' action='admin_consultas.php' method='POST'><label>¿Qué nombre y descripción va a tener?</label><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' /><input name='desubcat' type='text' placeholder='Descripción' /><input type='submit' name='add2' value='Añadir'></form>"; ?>";
+        	document.getElementById('subcat').innerHTML = "<?php echo "<br><label>¿Qué nombre y descripción va a tener?</label><br><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' required /><input name='desubcat' type='text' placeholder='Descripción' required /><input type='submit' name='add2' value='Añadir'>"; ?>";
         }
 
     </script>

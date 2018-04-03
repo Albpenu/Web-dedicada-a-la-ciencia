@@ -83,6 +83,14 @@ form#formu {
     top: 30%;
 }
 
+div#categorias {
+     width: 950px; 
+     margin: auto;
+}
+
+div#categoria1, #categoria2, #categoria3 {
+    width: 300px;
+}
 
 //-webkit-animation: 2s bote infinite;
 //@-webkit-keyframes bote {

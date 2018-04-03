@@ -53,7 +53,11 @@
 								setcookie("passU", $_POST['password'], time()+157680000);
 							}
 							$_SESSION['email'] = $_POST['email'];
-							echo "<script>alert('¡BIENVENIDO, ADMINISTRADOR!');</script>";
+						    $_SESSION['usuario'] = $usuario['alias'];
+						    $_SESSION['imagendeperfil'] = $imagen2['imagendeperfil'];
+						    $_SESSION['acceso'] = TRUE;
+						    include('conexion.php');
+							echo "<script>alert('¡BIENVENIDO, ADMINISTRAAAADOR!');</script>";
 							echo "<script>window.location = 'admin.php';</script>";
 						}else {
 							echo "<script>alert('Contraseña INCORRECTA');</script>";

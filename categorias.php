@@ -42,41 +42,60 @@
 
   <?php
   $nombreydesc1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
+  $id1 = mysqli_fetch_assoc($nombreydesc1);
+
   $nombreydesc2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
+  $id2 = mysqli_fetch_assoc($nombreydesc2);
+
   $nombreydesc3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
+  $id3 = mysqli_fetch_assoc($nombreydesc3);
+
 	$fechacat = mysqli_query($connect, "SELECT fecha_ultima_actualizacion FROM categorias WHERE id_categoria = '".$idcat."';");
-	$fcat = mysqli_fetch_array($fechacat);
+	$fcat = mysqli_fetch_array($fechacat); 
 	 ?>
   	
-  	<div style="clear: both;">
-  		<img style="cursor: pointer;" src="rsc/img/1.gif" id="imgcategoria1" width="300" alt="<?php 
-      $id1 = mysqli_fetch_assoc($nombreydesc1);
-      echo utf8_encode($id1['nombre_categoria']);
-      ?>">
-  		<div id="categoria1">
-  			<label style="color: white;"><?php echo utf8_encode($id1['descripcion']); ?></label>
+  	<div style="float: left; margin-right: 25px;">
+      <a href="posts.php?categoria=<?php echo $id1['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
+    		<img style="display: block; position: relative;" src="rsc/img/1.gif" width="300" alt="<?php 
+        echo $id1['nombre_categoria'];
+        ?>">
+        <h1 style="display: block; position: absolute; width: 100%; bottom: -16px; color: white"><?php echo $id1['nombre_categoria']; ?></h1>
+      </div></a>
+      <div id="categoria1">
+      <img id="imgcategoria1" src="rsc/img/info.gif" alt="Más información" style="cursor: pointer; border-radius: 100%; width: 100px">
+      <br>
+  			<label id="desccat1" style="color: white;"><?php echo $id1['descripcion']; ?></label>
   		</div>
   	</div>
 
-  	<div>
-  		<img style="cursor: pointer; clear: both;" src="rsc/img/2.gif" id="imgcategoria2" width="300" alt="<?php 
-      $id2 = mysqli_fetch_assoc($nombreydesc2);
-      echo utf8_encode($id2['nombre_categoria']);
-      ?>">	
-  		<div id="categoria2">
-  			<label style="color: white;"><?php echo utf8_encode($id2['descripcion']); ?></label>
+  	<div style="float: left; margin-right: 25px;">
+      <a href="posts.php?categoria=<?php echo $id2['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
+    		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/2.gif" width="300" alt="<?php 
+        echo $id2['nombre_categoria'];
+        ?>">
+        <h1 style="display: block; position: absolute; width: 100%; bottom: -16px; color: black;"><?php echo $id2['nombre_categoria']; ?></h1>
+      </div></a>
+      <div id="categoria2">
+      <img id="imgcategoria2" src="rsc/img/info.gif" alt="Más información" style="cursor: pointer; border-radius: 100%; width: 100px">
+      <br>
+  			<label id="desccat2" style="color: white;"><?php echo $id2['descripcion']; ?></label>
   		</div>	
   	</div>
 
-  	<div>
-  		<img style="cursor: pointer; clear: both;" src="rsc/img/3.gif" id="imgcategoria3" width="300" alt="<?php 
-      $id3 = mysqli_fetch_assoc($nombreydesc3);
-      echo utf8_encode($id3['nombre_categoria']);
-      ?>">	
-  		<div id="categoria3">
-  			<label style="color: white;"><?php echo utf8_encode($id3['descripcion']); ?></label>
+  	<div style="float: left;">
+      <a href="posts.php?categoria=<?php echo $id3['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer; ">
+    		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/3.gif" width="300" alt="<?php 
+        echo $id3['nombre_categoria'];
+        ?>">	
+        <h1 style="display: block; position: absolute; width: 100%; bottom: -16px; color: white;"><?php echo $id3['nombre_categoria']; ?></h1>
+      </div></a>
+      <div id="categoria3">
+      <img id="imgcategoria3" src="rsc/img/info.gif" alt="Más información" style="cursor: pointer; border-radius: 100%; width: 100px">
+      <br>
+  			<label id="desccat3" style="color: white;"><?php echo $id3['descripcion']; ?></label>
   		</div>
-  	</div>	
+  	</div>
+
   </div>
 
   <script type="text/javascript">
@@ -104,50 +123,59 @@
       var t = setTimeout(horario, 500);
     }
     //ACORDEON DE CATEGORIAS
-    $("div#categorias > div > div#categoria1").hide();
-    $("div#categorias > div > div#categoria2").hide();
-    $("div#categorias > div > div#categoria3").hide();
+    $("div#categorias > div > div#categoria1 > label#desccat1").hide();
+    $("div#categorias > div > div#categoria2 > label#desccat2").hide();
+    $("div#categorias > div > div#categoria3 > label#desccat3").hide();
         
-    $("div#categorias > div > img#imgcategoria1").click(function() {
-        $("div#categorias > div > div#categoria1").animate({
+    $("img#imgcategoria1").click(function() {
+        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria2").animate({
+        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria3").animate({
+        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
             height: "hide"
         }, 1500);
+
+        $("div#categorias > div > div#categoria1").css("background-color", "#01E4AD");
+        $(this).css("border-radius", "0%");
     });
 
-    $("div#categorias > div > img#imgcategoria2").click(function() {
-        $("div#categorias > div > div#categoria2").animate({
+    $("img#imgcategoria2").click(function() {
+        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria1").animate({
+        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria3").animate({
+        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
             height: "hide"
         }, 1500);
+
+        $("div#categorias > div > div#categoria2").css("background-color", "#01E4AD");
+        $(this).css("border-radius", "0%");
     });
 
-    $("div#categorias > div > img#imgcategoria3").click(function() {
-        $("div#categorias > div > div#categoria3").animate({
+    $("img#imgcategoria3").click(function() {
+        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria2").animate({
+        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria1").animate({
+        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
             height: "hide"
         }, 1500);
+
+        $("div#categorias > div > div#categoria3").css("background-color", "#01E4AD");
+        $(this).css("border-radius", "0%");
     });
   </script>
 </body>
