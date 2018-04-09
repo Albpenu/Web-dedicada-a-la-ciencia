@@ -63,4 +63,5 @@ CREATE TABLE  `imagen_de_perfil` (
 PRIMARY KEY  (`id_imagen`),
 foreign key (id_usuario) references usuarios(id_usuario)
 );
+/* CAMBIAR ZONA HORARIA */
 
