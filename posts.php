@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include('conexion.php');
 	$cat = mysqli_query($connect, "SELECT id_categoria FROM categorias WHERE nombre_categoria = '".$_GET['categoria']."';");
 	$cateleg = mysqli_fetch_assoc($cat);
@@ -19,9 +20,19 @@
 	<label><?php  ?></label>
 	<h1 style="text-decoration: underline;">Subcategorías: </h1>
 		<?php
+			if (isset($_POST['publicar'])) {
+				$titulo = $_POST['titulo'];
+
+				$descripcion = $_POST['descripcion'];
+
+				$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, imagen, video, fecha_subida) VALUES '', '', '', '$titulo', '$descripcion', '', '', 'now()';");
+				
+				$resultado = $connect->query($sql) or die(mysqli_error($connect));	
+			}
+
 			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label><br><img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px;' name='form' action='posts_publicados.php' method='POST'>
+			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label><br><img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px;' name='form' action='' method='POST'>
 		<h2>Escriba su post:</h2>
 		<input type='text' name='titulo' placeholder='Título' style='font-size: 30px'><br>
 		<textarea name='descripcion' placeholder='Descripción' rows='10' cols='60' style='resize: none; font-size: 30px'></textarea><br>
