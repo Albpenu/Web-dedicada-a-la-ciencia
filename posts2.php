@@ -23,7 +23,31 @@
 
 			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label><br><img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px;' name='form' action='' method='POST'>
+			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label><br>";
+
+			$sql = "SELECT * FROM posts;";
+			$resultado = $connect->query($sql) or die(mysqli_error($connect));
+		?>
+			<table border="1px solid black" cellspacing="0">
+				<thead style="background-color: #4d8cf2;">
+					<th>Título</th>
+					<th>Descripción</th>
+					<th>Fecha de subida</th>
+				</thead>
+				<tbody>
+		<?php
+			if (mysqli_num_rows($resultado)>0) {
+			    while($valor = mysqli_fetch_assoc($resultado)) {
+			        echo "<tr><td align='center'>" .$valor["titulo"]. "</td><td align='center'>".$valor["contenido"]. "</td><td align='center'>".$valor["fecha_subida"]. "</td></tr>";
+			    }
+			} else {
+			    echo "<tr><td colspan='3' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";
+			}
+		?>
+				</tbody>
+			</table>
+		<?php
+			        echo "<img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px;' name='form' action='' method='POST'>
 		<h2>Escriba su post:</h2>
 		<input required type='text' name='titulo' placeholder='Título' style='font-size: 30px'><br>
 		<textarea required name='descripcion' placeholder='Descripción' rows='10' cols='60' style='resize: none; font-size: 30px'></textarea><br>
@@ -44,8 +68,6 @@
 			    echo "<h2 align='center'>NO HAY CONTENIDO EN ESTA CATEGORÍA</h2>";
 			}
 		?>
-				</tbody>
-			</table>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("img.add").click(function () {
