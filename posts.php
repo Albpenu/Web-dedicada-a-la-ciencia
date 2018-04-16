@@ -23,7 +23,33 @@
 
 			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
-			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label><br><img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px;' name='form' action='' method='POST'>
+			        echo "<h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label>";
+
+			$sql2 = "SELECT * FROM posts WHERE id_subcategoria='".$valor["id_subcategoria"]."';";
+			$resultado2 = $connect->query($sql2) or die(mysqli_error($connect));
+
+			?>
+			<table border="1px solid black" cellspacing="0">
+				<thead style="background-color: #4d8cf2;">
+					<th>Id subcat</th>
+					<th>Título</th>
+					<th>Descripción</th>
+					<th>Fecha de subida</th>
+				</thead>
+				<tbody>
+		<?php
+			if (mysqli_num_rows($resultado2)>0) {
+			    while($valor2 = mysqli_fetch_assoc($resultado2)) {
+			        echo "<tr><td align='center'>" .$valor2["id_subcategoria"]. "</td><td align='center'>" .$valor2["titulo"]. "</td><td align='center'>".$valor2["contenido"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
+			    }
+			} else {
+			    echo "<tr><td colspan='4' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";
+			}
+		?>
+				</tbody>
+			</table>
+		<?php
+			echo "<img class='add' id='".$valor["nombre_subcategoria"]."' src='rsc/img/add.gif' alt='Añadir post' style='cursor: pointer; border-radius: 100%; width: 100px;'><form style='display:none; border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px; margin-top: 10px' name='form' action='' method='POST'>
 		<h2>Escriba su post:</h2>
 		<input required type='text' name='titulo' placeholder='Título' style='font-size: 30px'><br>
 		<textarea required name='descripcion' placeholder='Descripción' rows='10' cols='60' style='resize: none; font-size: 30px'></textarea><br>
@@ -37,7 +63,11 @@
 				$titulo = $_POST['titulo'];
 				$descripcion = $_POST['descripcion'];
 
-				$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, fecha_subida) VALUES ('', '$idsubcat', '".$idusu[0]."', '$titulo', '$descripcion', 'now()');") or die(mysqli_error($connect));
+				if (isset($_SESSION['email'])) {
+					$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, fecha_subida) VALUES ('', '$idsubcat', '".$idusu[0]."', '$titulo', '$descripcion', 'now()');") or die(mysqli_error($connect));
+				}	else {
+					echo "<script>confirm('Disculpe, caballero, pero me temo que debe primero iniciar sesión con su cuenta');</script>";
+			    }
 			}
 			    }
 			} else {
