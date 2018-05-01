@@ -47,6 +47,7 @@ UPDATE usuarios set alias='100tífico3' where id_usuario=5;
 SELECT * from categorias;
 SELECT * from subcategorias;
 SELECT * FROM posts;
+truncate posts;
 TRUNCATE subcategorias;
 SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE table subcategorias;
