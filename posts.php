@@ -4,7 +4,8 @@
 	$cat = mysqli_query($connect, "SELECT id_categoria FROM categorias WHERE nombre_categoria = '".$_GET['categoria']."';");
 	$cateleg = mysqli_fetch_assoc($cat);
 	var_dump($cateleg['id_categoria']);
-	$sql = "SELECT * FROM subcategorias WHERE id_categoria = '".$cateleg['id_categoria']."';";
+	$_SESSION['id_cat'] = $cateleg['id_categoria'];
+	$sql = "SELECT * FROM subcategorias WHERE id_categoria = '".$_SESSION['id_cat']."';";
 	$resultado = $connect->query($sql) or die(mysqli_error($connect));
 ?>
 <!DOCTYPE html>

@@ -6,9 +6,21 @@
 </head>
 <body>
 	<?php
+	
+		session_start();
 		include('conexion.php');
+		$consulta = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = '".$_SESSION['id_cat']."'");
+		$ncat = mysqli_fetch_assoc($consulta);
+		echo '<h1>Para la categoría "'.$ncat['nombre_categoria'].'"</h1>';
+	
 		echo "<form style='border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px; margin-top: 10px' name='form' action='' method='POST'>
 			<h2>Escriba su post:</h2>
+			<label>¿A qué subcategoría va a pertenecer? </label><select>";
+			$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$_SESSION['id_cat']."';");
+			while ($nsubcat = mysqli_fetch_array($consulta)) {
+				echo "<option>".$nsubcat[0]."</option>";
+			}
+			echo "</select><br>
 			<input required type='text' name='titulo' placeholder='Título' style='font-size: 30px'><br>
 			<textarea required name='descripcion' placeholder='Descripción' rows='10' cols='60' style='resize: none; font-size: 30px'></textarea><br>
 			<input type='submit' style='font-size: 30px' name='publicar' value='Publicar post'>
