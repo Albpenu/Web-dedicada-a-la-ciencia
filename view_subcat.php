@@ -27,7 +27,7 @@
 		<?php
 			if (mysqli_num_rows($sql)>0) {
 			    while($valor = mysqli_fetch_assoc($sql)) {
-			        echo "<tr><td id='".$valor["id_subcategoria"]."' align='center'><a href='view_post.php?subcat=".$valor["titulo"]."'>" .$valor["titulo"]. "</a></td><td align='center'>".$valor["contenido"]. "</td><td align='center'>".$valor["fecha_subida"]. "</td></tr>";
+			        echo "<tr><td id='".$valor["id_subcategoria"]."' align='center'><a href='view_post.php?post=".$valor["titulo"]."'>" .$valor["titulo"]. "</a></td><td align='center'>".$valor["contenido"]. "</td><td align='center'>".$valor["fecha_subida"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";

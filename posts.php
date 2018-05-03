@@ -18,6 +18,7 @@
 <body>	
 	<h1 style="border-bottom: 1px solid black;"><?php echo 'Categoría: "'.$_GET['categoria'].'"<div style="display: inline-block; float: right;" id="add"></div>'; ?></h1>
 	<h1 style="text-decoration: underline;">Subcategorías: </h1>
+
 		<?php
 
 			if ((mysqli_num_rows($resultado)>0)) {
@@ -39,7 +40,7 @@
 		<?php
 			if (mysqli_num_rows($resultado2)>0) {
 			    while($valor2 = mysqli_fetch_assoc($resultado2)) {
-			        echo "<tr><td align='center'>" .$valor2["id_subcategoria"]. "</td><td align='center'><a href='view_post.php?subcat=".$valor2["titulo"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".$valor2["contenido"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
+			        echo "<tr><td align='center'>" .$valor2["id_subcategoria"]. "</td><td align='center'><a href='view_post.php?post=".$valor2["titulo"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".$valor2["contenido"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";
