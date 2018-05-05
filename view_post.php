@@ -6,8 +6,7 @@
 <body>
 	<?php
 		include('conexion.php');
-		echo $_GET['post'];
-		$consulta = mysqli_query($connect, "SELECT video FROM posts;");
+		$consulta = mysqli_query($connect, "SELECT video FROM posts WHERE titulo LIKE '".$_GET['post']."';");
 		$video = mysqli_fetch_array($consulta);
 		$id_video = substr($video[0], strpos($video[0], "=") + 1);    
 		echo $id_video;
