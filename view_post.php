@@ -2,16 +2,20 @@
 <html>
 <head>
 	<title></title>
-</head>
+</head>`
 <body>
 	<?php
 		include('conexion.php');
-		$consulta = mysqli_query($connect, "SELECT video FROM posts WHERE titulo LIKE '".$_GET['post']."';");
-		$video = mysqli_fetch_array($consulta);
-		$id_video = substr($video[0], strpos($video[0], "=") + 1);    
-		echo $id_video;
+		$consulta = mysqli_query($connect, "SELECT * FROM posts WHERE titulo LIKE '".$_GET['post']."';");
+		$post = mysqli_fetch_assoc($consulta);
+		$video = substr($post['video'], strpos($post['video'], "=") + 1);
+	?>
+	<h1><?php  ?></h1>
+
+	<?php 
+		echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="100"/><br>';   
     ?>
 	 <iframe type="text/html" width="420" height="315"
-    src="https://www.youtube.com/embed/<?php echo $id_video;?>" frameborder="0" allowfullscreen></iframe>
+    src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe>
 </body>
 </html>

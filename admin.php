@@ -131,7 +131,7 @@
 			</table>
 	</div>
 
-	<!--Insertar subcategorías-->
+	<!--Insertar subcategoría-->
 	<div style="float: left; clear: both;">
 			<?php
 				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
@@ -148,6 +148,18 @@
 		</form>
 	</div>
 
+	<!--Eliminar subcategoría
+	<div style="float: left; clear: both;">
+			<h1>Eliminar subcategoría:</h1>
+			<label>¿A qué categoría pertenece? Selecciónala:</label>
+		<form action="admin_consultas.php" method="POST">
+			<br><input type="radio" name="categoria2" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria2" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
+			<input type="radio" name="categoria2" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
+			<label id="subcat2"></label>
+		</form>
+	</div>
+-->
 	<script type="text/javascript">
         function showHidePass(){
             var pass = document.getElementById("pass");
@@ -172,7 +184,17 @@
         	var catselecc = categoria.value;
         	document.getElementById('subcat').innerHTML = "<?php echo "<br><label>¿Qué nombre y descripción va a tener?</label><br><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' required /><input name='desubcat' type='text' placeholder='Descripción' required /><input type='submit' name='add2' value='Añadir'>"; ?>";
         }
-
+/*
+        function catSelecc2(categoria2){
+        	var catselecc = categoria.value;
+        	document.getElementById('subcat2').innerHTML = "<br><label>¿Cuál es el nombre de la subcategoría que quieres eliminar? Selecciónalo:</label><br><br><select name='nsubcat'><?php
+			$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$_POST['categoria2']."';");
+			while ($nsubcat = mysqli_fetch_array($consulta)) {
+				echo "<option>".$nsubcat[0]."</option>";
+			}
+			echo "</select><input type='submit' name='remove2' value='Eliminar' onclick='remove()'>"; ?>";
+        }
+*/
     </script>
     <?php
     ?>

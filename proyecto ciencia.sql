@@ -31,6 +31,7 @@ primary key (id_subcategoria));
 
 ALTER table categorias change titulo nombre_categoria varchar(50);
 ALTER table subcategorias change fecha_ultima_actualizacion fecha_ultima_actualizacion DATETIME;
+ALTER TABLE posts CHANGE contenido contenido VARCHAR(100000);
 
 CREATE TABLE categorias (id_categoria INT not NULL auto_increment, titulo varchar(50), 
 descripcion varchar(200), fecha_ultima_actualizacion datetime, 
@@ -47,11 +48,13 @@ UPDATE usuarios set alias='100tífico3' where id_usuario=5;
 SELECT * from categorias;
 SELECT * from subcategorias;
 SELECT * FROM posts;
+SELECT * FROM usuarios;
 truncate posts;
 TRUNCATE subcategorias;
 SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE table subcategorias;
 SET FOREIGN_KEY_CHECKS=1;
+ALTER TABLE ‘table_name’ ADD ‘column_name’ INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
 /*DROP table ;
 ALTER TABLE usuarios change contraseña contrasenia varchar(20);
 SELECT * from usuarios;

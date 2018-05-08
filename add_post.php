@@ -36,13 +36,15 @@
 				$descripcion = $_POST['descripcion'];
 				$img = $_POST['imagen'];
 				$video = $_POST['video'];
-				$idpost = 0;
-				$idpost = $idpost+1;
 
 				if (isset($_SESSION['email'])) {
-					$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, imagen, video, fecha_subida) VALUES ('$idpost', '".$idsubcat[0]."', '".$idusu[0]."', '$titulo', '$descripcion', '$img', '$video', 'now()');") or die(mysqli_error($connect));
 
-					echo "<script>alert('¡Publicación realizada!');</script>";
+					$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, imagen, video, fecha_subida) VALUES (NULL, '".$idsubcat[0]."', '".$idusu[0]."', '$titulo', '$descripcion', '$img', '$video', 'now()');") or die(mysqli_error($connect));
+
+					if ($sql) {
+						echo "<script>alert('¡Publicación realizada!');</script>";
+					}
+
 				}	else {
 					echo "<script>confirm('Disculpe, caballero, pero me temo que debe primero iniciar sesión con su cuenta');</script>";
 			    }

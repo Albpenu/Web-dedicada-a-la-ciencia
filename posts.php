@@ -31,16 +31,19 @@
 			?>
 			<table border="1px solid black" cellspacing="0">
 				<thead style="background-color: #4d8cf2;">
-					<th>Id subcat</th>
 					<th>Título</th>
 					<th>Descripción</th>
+					<th>Autor</th>
 					<th>Fecha de subida</th>
 				</thead>
 				<tbody>
 		<?php
 			if (mysqli_num_rows($resultado2)>0) {
 			    while($valor2 = mysqli_fetch_assoc($resultado2)) {
-			        echo "<tr><td align='center'>" .$valor2["id_subcategoria"]. "</td><td align='center'><a href='view_post.php?post=".$valor2["titulo"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".$valor2["contenido"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
+			    	$consulta = mysqli_query($connect, "SELECT * FROM usuarios WHERE id_usuario = '".$valor2["id_usuario"]."';");
+			    	$usu = mysqli_fetch_assoc($consulta);
+
+			        echo "<tr><td align='center' id='".$valor2["id_subcategoria"]."'><a href='view_post.php?post=".$valor2["titulo"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".substr($valor2["contenido"], 0, 100)."...</td><td align='center'>".$usu["alias"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";

@@ -27,7 +27,7 @@
 		} else {}
 
 		if (isset($remove1)) {
-			$consulta = mysqli_query($connect, "DELETE FROM usuarios WHERE id_usuario = '$idusuario';") or die(mysqli_error($connect));
+			$consulta = mysqli_query($connect, "DELETE * FROM usuarios WHERE id_usuario = '$idusuario';") or die(mysqli_error($connect));
 	        //header('location: admin.php');
 		} else {
 
@@ -46,6 +46,13 @@
 				</script>';*/
 
 		} else {}
+
+		if (isset($remove2)) {
+			$consulta = mysqli_query($connect, "DELETE * FROM subcategorias WHERE id_categoria = '".$idcat[0]."' AND id_subcategoria = '".$idcat[0]."';") or die(mysqli_error($connect));
+	        //header('location: admin.php');
+		} else {
+
+		}
 	?>
 </body>
 </html>
