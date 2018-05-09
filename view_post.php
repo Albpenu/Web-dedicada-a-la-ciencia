@@ -10,8 +10,8 @@
 		$post = mysqli_fetch_assoc($consulta);
 		$video = substr($post['video'], strpos($post['video'], "=") + 1);
 	?>
-	<h1><?php  ?></h1>
-
+	<h1><?php echo $post['titulo']; ?></h1>
+	<label><?php echo $post['contenido']; ?></label>
 	<?php 
 		echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="100"/><br>';   
     ?>
