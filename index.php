@@ -40,6 +40,7 @@
     echo "<p style='color: white;'>".$fecha.", <label id='hora'></label></p>";
 
   ?>
+    <a href="categorias.php">CATEGORíAS</a>
     <div id="imglogo" align="center">
     	<img id="logo" src="rsc/img/acceso.gif" />
     </div>

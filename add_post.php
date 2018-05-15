@@ -12,7 +12,7 @@
 		$ncat = mysqli_fetch_assoc($consulta);
 		echo '<h1>Para la categoría "'.$ncat['nombre_categoria'].'"...</h1>';
 	
-		echo "<form style='border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px; margin-top: 10px' name='form' action='' method='POST'>
+		echo "<form style='border-bottom: 1px dotted black; border-top: 1px dotted black; padding-bottom: 15px; border-width: 10px; margin-top: 10px' name='form' action='' method='POST'  enctype='multipart/form-data'>
 			<h2 style='text-decoration: underline;'>Escriba su post:</h2>
 			<h3>¿A qué subcategoría va a pertenecer? <select name='nsubcat'>";
 			$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$_SESSION['id_cat']."';");
@@ -22,7 +22,7 @@
 			echo "</select></h3><br>
 			<input required type='text' name='titulo' placeholder='Título' style='font-size: 30px'><br>
 			<textarea required name='descripcion' placeholder='Descripción' rows='10' cols='60' style='resize: none; font-size: 30px'></textarea><br>
-			<h3>Adjunte una imagen en relación al post (si quiere):</h3><input type='file' name='imagen' id='imagenpost' /><br>
+			<h3>Adjunte una imagen en relación al post (si quiere):</h3><input type='file' name='imagenpost' id='imagenpost' /><br>
 			<h3>Adjunte la página con un vídeo de youtube relacionado (si quiere):</h3><input type='text' name='video' /><br><br>
 			<input type='submit' id='add' style='font-size: 30px' name='publicar' value='Publicar post'>
 		</form><br>";
@@ -34,9 +34,7 @@
 				$idusu = mysqli_fetch_array($idu);
 				$titulo = $_POST['titulo'];
 				$descripcion = $_POST['descripcion'];
-				$img = $_POST['imagen'];
-				$img = $_FILES["imagen"]["tmp_name"];
-				$imagenpost = addslashes(file_get_contents($_POST['imagen']));
+				$imagenpost = addslashes(file_get_contents($_FILES["imagenpost"]["tmp_name"]));
 				$video = $_POST['video'];
 
 				if (isset($_SESSION['email'])) {
@@ -45,6 +43,7 @@
 
 					if ($sql) {
 						echo "<script>alert('¡Publicación realizada!');</script>";
+						echo '<img src="data:image/jpeg;base64,'.base64_encode($imagenpost).'" width="100"/><br>';  
 					}
 
 				}	else {

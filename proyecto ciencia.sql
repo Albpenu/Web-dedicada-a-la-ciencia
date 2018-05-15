@@ -30,6 +30,7 @@ foreign key (id_categoria) references categorias(id_categoria),
 primary key (id_subcategoria));
 
 ALTER table categorias change titulo nombre_categoria varchar(50);
+ALTER table posts change titulo titulo varchar(250);
 ALTER table subcategorias change fecha_ultima_actualizacion fecha_ultima_actualizacion DATETIME;
 ALTER TABLE posts CHANGE contenido contenido VARCHAR(100000);
 
@@ -54,7 +55,7 @@ TRUNCATE subcategorias;
 SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE table subcategorias;
 SET FOREIGN_KEY_CHECKS=1;
-ALTER TABLE ‘table_name’ ADD ‘column_name’ INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+ALTER TABLE subcategorias CHANGE id_subcategoria id_subcategoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
 /*DROP table ;
 ALTER TABLE usuarios change contraseña contrasenia varchar(20);
 SELECT * from usuarios;
@@ -69,4 +70,11 @@ PRIMARY KEY  (`id_imagen`),
 foreign key (id_usuario) references usuarios(id_usuario)
 );
 /* CAMBIAR ZONA HORARIA */
+SET sql_mode='NO_AUTO_VALUE_ON_ZERO';
+show create table posts;
 
+select * from posts;
+
+ALTER TABLE votos ADD id_post INT;
+
+ALTER TABLE votos ADD CONSTRAINT foreign key fk (id_post) REFERENCES posts (id_post) ON delete CASCADE ON UPDATE cascade;
