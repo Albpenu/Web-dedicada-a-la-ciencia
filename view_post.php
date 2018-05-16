@@ -37,7 +37,7 @@
 	<h1><?php echo utf8_decode($post['titulo']); ?></h1>
 	<label><?php echo utf8_decode($post['contenido'])."<br>"; ?></label>
 	<?php 
-		echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="100"/><br>';   
+		echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="300"/><br>';   
     ?>
 	 <iframe type="text/html" width="420" height="315"
     src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe><br>
@@ -55,12 +55,21 @@
     </form>
     <?php
     	include('conexion.php');
-    	//$idusu = ;
-    	//$idpost = ;
+
     	$idu = mysqli_query($connect, "SELECT id_usuario FROM usuarios WHERE alias='".$_SESSION['usuario']."';");
     	$idusu = mysqli_fetch_array($idu);
-    	echo $idusu[0];
-    	mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."';");
+    	if($_POST['puntos'] >= 1 && !isset($_SESSION['votoxusu'])){
+    		$_SESSION['votoxusu'] = 1;
+    		mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
+    		echo "<br>".count($idusu[0]); 		
+    	}
+    	
+    	$consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos;");
+    	$media = mysqli_fetch_array($consulta);
+		echo "<br><h1>".$media[0]."</h1><br>";    
+    	
+    	var_dump($connect);
+
     ?>
     <script type="text/javascript">
     	document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
