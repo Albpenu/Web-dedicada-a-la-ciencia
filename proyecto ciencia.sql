@@ -73,7 +73,11 @@ foreign key (id_usuario) references usuarios(id_usuario)
 SET sql_mode='NO_AUTO_VALUE_ON_ZERO';
 show create table posts;
 
-select * from posts;
+select * from votos;
+TRUNCATE TABLE votos;
+DELETE FROM votos WHERE id_voto = 2;
+
+SELECT * FROM usuarios;
 
 ALTER TABLE votos ADD id_post INT;
 

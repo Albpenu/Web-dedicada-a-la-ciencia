@@ -63,12 +63,28 @@
     		mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
     		echo "<br>".count($idusu[0]); 		
     	}
-    	
+
     	$consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos;");
     	$media = mysqli_fetch_array($consulta);
 		echo "<br><h1>".$media[0]."</h1><br>";    
     	
     	var_dump($connect);
+        echo "<br>";
+
+        for($i=0; $i<=4; $i++) { // simple for loop
+   
+            if ($media[0] >= 1) { // it going to check if your average rating is greater than equal to 1 or not if it is then it give you full star.
+              echo '<img src="rsc/img/Star (Full).png" width="100"/>';
+              $media[0]--; //after getting full star it decremnt the value and contiune the loop.
+            }else {
+              if ($media[0] >= 0.5) { // if user select 3.5 rating, so in above condition at last it remain 0.5 rating will get left. then it came to this condition and give you the half star.
+               echo '<img src="rsc/img/Star (Half Full).png" width="100"/>';
+                $media[0] -= 0.5;
+              }else { // at last but not the least when value gets zero then it return empty star.
+                echo '<img src="rsc/img/Star (Empty).png" width="100"/>';
+              }
+            }
+          }
 
     ?>
     <script type="text/javascript">
