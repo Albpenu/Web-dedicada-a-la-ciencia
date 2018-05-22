@@ -61,18 +61,24 @@
                 $id = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_usuario='".$idusu[0]."';");
                 $idxpost = mysqli_fetch_array($id);
 
-                if($_POST['puntos'] >= 1 && !isset($_SESSION['votoxusu'])){
+                if($_POST['puntos'] >= 1 && !isset($_SESSION['votoxusu']) && count($idusu[0])==1){
                     $_SESSION['votoxusu'] = 1;
                     mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
                             echo "<br>".count($idusu[0]);
-
-
-                } 
-                elseif ($_POST['puntos'] >= 1 && count($idxpost[0])>1) {
-                    echo "<script>alert('¡".$_SESSION['usuario'].", sólo puedes votar una vez!');</script>";
-                } 
-                elseif ($_POST['puntos'] >= 1 && isset($_SESSION['usuario'])) {
-                    echo "<script>alert('¡Disculpa, pero ¿¿quién eres??!');</script>";
+                } else {
+                    if (count($idxpost[0])>1) {
+                    ?>
+                    <script type="text/javascript">
+                        alert('¡<?php echo $_SESSION['usuario']; ?>, sólo puedes votar una vez!');
+                    </script>
+                    <?php
+                    } elseif (!isset($_SESSION['usuario'])) {
+                    ?>
+                    <script type="text/javascript">
+                        alert('¡Disculpa, pero ¿¿quién eres??!');
+                    </script>
+                    <?php
+                    }
                 }
                 
 
