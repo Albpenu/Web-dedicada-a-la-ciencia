@@ -41,7 +41,7 @@
             <iframe type="text/html" width="420" height="315"
             src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe><br>
             <form action="" method="POST">
-                <h1>Votos:</h1>
+                <h1>Vota:</h1>
                 <select name="puntos">
                     <option>Puntuación</option>
                     <option>1</option>
@@ -63,7 +63,9 @@
                 }
                 $consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos;");
                 $media = mysqli_fetch_array($consulta);
-                    echo "<br><h1>".$media[0]."</h1><br>";
+                $idvoto = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_post = '".$post['id_post']."';");
+                $voto = mysqli_fetch_array($idvoto);
+                    echo "<br><span style='display: inline-flex; background-color: #f2c635; border-radius: 100%'><h1><u>".round($media[0],2)."</u></h1><p>(media con ".$voto[0]." votos)</p></span><br>";
                 
                 var_dump($connect);
             echo "<br>";
