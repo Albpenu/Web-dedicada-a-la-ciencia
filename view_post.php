@@ -54,68 +54,84 @@
             </form>
             <?php
                 include('conexion.php');
+
                 $idu = mysqli_query($connect, "SELECT id_usuario FROM usuarios WHERE alias='".$_SESSION['usuario']."';");
                 $idusu = mysqli_fetch_array($idu);
+
+                $id = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_usuario='".$idusu[0]."';");
+                $idxpost = mysqli_fetch_array($id);
+
                 if($_POST['puntos'] >= 1 && !isset($_SESSION['votoxusu'])){
                     $_SESSION['votoxusu'] = 1;
                     mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
                             echo "<br>".count($idusu[0]);
+
+
+                } 
+                elseif ($_POST['puntos'] >= 1 && count($idxpost[0])>1) {
+                    echo "<script>alert('¡".$_SESSION['usuario'].", sólo puedes votar una vez!');</script>";
+                } 
+                elseif ($_POST['puntos'] >= 1 && isset($_SESSION['usuario'])) {
+                    echo "<script>alert('¡Disculpa, pero ¿¿quién eres??!');</script>";
                 }
-                $consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos;");
+                
+
+                $consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos WHERE id_post = '".$post['id_post']."';");
                 $media = mysqli_fetch_array($consulta);
                 $idvoto = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_post = '".$post['id_post']."';");
                 $voto = mysqli_fetch_array($idvoto);
-                    echo "<br><span style='display: inline-flex; background-color: #f2c635; border-radius: 100%'><h1><u>".round($media[0],2)."</u></h1><p>(media con ".$voto[0]." votos)</p></span><br>";
-                
-                var_dump($connect);
+                    echo "<br><span style='display: inline-flex; background-color: #F7912D; border-radius: 100%'><h1><u>".round($media[0],2)."</u><img src='rsc/img/STARS/9.png' width='25'/></h1><p>(media con ".$voto[0]." votos)</p></span><br>";
             echo "<br>";
             
             for($i=0; $i<=4; $i++) { 
             
-            if ($media[0] >= 1) {
-            echo '<img src="rsc/img/STARS/9.png" width="100"/>';
-            $media[0]--;
-            echo $media[0];
-                 } else {
-                    if ($media[0] >= 0.1) {
+                if ($media[0] >= 1) {
+                    echo '<img src="rsc/img/STARS/9.png" width="100"/>';
+                    
+                   
+                } else {
+
+                    if ($media[0] >= 0.1 && $media[0]<0.2) {
                         echo '<img src="rsc/img/STARS/2.png" width="100"/>';
-                        $media[0] -= 0.1;
-                        echo $media[0];
-                    } elseif ($media[0] >= 0.2) {
+                        
+                        
+                    } elseif ($media[0] >= 0.2 && $media[0]<0.3) {
                         echo '<img src="rsc/img/STARS/3.png" width="100"/>';
-                        $media[0] -= 0.2;
-                        echo $media[0];
-                    } elseif ($media[0] >= 0.3) {
+                        
+                        
+                    } elseif ($media[0] >= 0.3 && $media[0]<0.45) {
                         echo '<img src="rsc/img/STARS/4.png" width="100"/>';
-                        $media[0] -= 0.3;
-                        echo $media[0];
-                    } elseif ($media[0] >= 0.45) {
+                        
+                        
+                    } elseif ($media[0] >= 0.45 && $media[0]<0.55) {
                         echo '<img src="rsc/img/STARS/5.png" width="100"/>';
-                        $media[0] -= 0.45;
-                        echo $media[0];
-                    } elseif ($media[0] >= 0.55) {
+                        
+                        
+                    } elseif ($media[0] >= 0.55 && $media[0]<0.65) {
                         echo '<img src="rsc/img/STARS/6.png" width="100"/>';
-                        $media[0] -= 0.55;
-                        echo $media[0];
-                    } elseif ($media[0] >= 0.65) {
+                        
+                        
+                    } elseif ($media[0] >= 0.65 && $media[0]<0.75) {
                         echo '<img src="rsc/img/STARS/7.png" width="100"/>';
-                        $media[0] -= 0.65;
-                        echo $media[0];
+                        
+                        
                     } elseif ($media[0] >= 0.75) {
                         echo '<img src="rsc/img/STARS/8.png" width="100"/>';
-                        $media[0] -= 0.75;
-                        echo $media[0];
+                        
+                        
                     } else {
                         echo '<img src="rsc/img/STARS/1.png" width="100"/>';
-                        echo $media[0];
+                        
                     }
-                 } 
+                }
+
+                $media[0]--;
             }
             
             ?>
             <script type="text/javascript">
             document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
             document.getElementById("usuario").innerHTML = '<?php session_start(); echo $_SESSION['usuario']." "; echo $_SESSION['imagenperfil']; ?>';
-            </script>
+            </script>   
         </body>
     </html>

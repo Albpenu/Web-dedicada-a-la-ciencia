@@ -74,6 +74,7 @@ SET sql_mode='NO_AUTO_VALUE_ON_ZERO';
 show create table posts;
 
 select * from votos;
+TRUNCATE table votos;
 TRUNCATE TABLE votos;
 DELETE FROM votos WHERE id_voto = 2;
 
