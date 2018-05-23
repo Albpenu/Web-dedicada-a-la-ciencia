@@ -40,7 +40,7 @@
             ?>
             <iframe type="text/html" width="420" height="315"
             src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe><br>
-            <form action="" method="POST">
+            <form method="POST">
                 <h1>Vota:</h1>
                 <select name="puntos">
                     <option>Puntuación</option>
@@ -61,25 +61,28 @@
                 $id = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_usuario='".$idusu[0]."';");
                 $idxpost = mysqli_fetch_array($id);
 
-                if($_POST['puntos'] >= 1 && !isset($_SESSION['votoxusu']) && count($idusu[0])==1){
-                    $_SESSION['votoxusu'] = 1;
-                    mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
+                if($_POST['puntos'] >= 1){
+
+                    if (count($idusu[0])==1 && $idxpost[0]==0) {
+                        mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
                             echo "<br>".count($idusu[0]);
-                } else {
-                    if ($_POST['puntos'] >= 1 && $idxpost[0]>1) {
-                    ?>
-                    <script type="text/javascript">
-                        alert('¡<?php echo $_SESSION['usuario']; ?>, sólo puedes votar una vez!');
-                    </script>
-                    <?php
-                    } elseif ($_POST['puntos'] >= 1 && !isset($_SESSION['usuario'])) {
-                    ?>
-                    <script type="text/javascript">
-                        alert('¡Disculpa, pero ¿¿quién eres??!');
-                    </script>
-                    <?php
+
+                    } elseif ($idxpost[0]>=1) {
+                        ?>
+                        <script type="text/javascript">
+                            alert('¡<?php echo $_SESSION['usuario']; ?>, sólo puedes votar una vez!');
+                        </script>
+                        <?php
+                    } elseif (!isset($_SESSION['usuario'])) {
+                        ?>
+                        <script type="text/javascript">
+                            alert('¡Disculpa, pero ¿¿quién eres??!');
+                        </script>
+                        <?php
                     }
-                }
+                } else {
+                    //Cuando no clicas o vacío
+                    }
                 
 
                 $consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos WHERE id_post = '".$post['id_post']."';");

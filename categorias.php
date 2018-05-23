@@ -56,6 +56,7 @@
   	
   	<div style="float: left; margin-right: 25px;">
       <a href="posts.php?categoria=<?php echo $id1['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
+      <!---->
     		<img style="display: block; position: relative;" src="rsc/img/1.gif" width="300" alt="<?php 
         echo $id1['nombre_categoria'];
         ?>">
