@@ -11,11 +11,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Culto a la ciencia</title>
 	<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
-	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
+  <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
 </head>
 <body onload="horario()">
-
+  <style type="text/css">
+    @font-face {
+        font-family: 'sciencefair';
+        src: url('fonts/Science Fair.otf') format('opentype');
+    }
+  </style>
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
@@ -37,10 +43,33 @@
   <?php
 
     $fecha = date('d/m/Y');
-    echo "<p style='color: white;'>".$fecha.", <label id='hora'></label></p>";
+    echo "<p style='color: white; padding-top: 15px;'>".$fecha.", <label id='hora'></label></p>";
 
   ?>
-    <a href="categorias.php">CATEGORíAS</a>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #436A6C !important">
+      <a class="navbar-brand" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 50px;">CULTO A LA CIENCIA</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categorias.php">CATEGORíAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <div id="imglogo" align="center">
     	<img id="logo" src="rsc/img/acceso.gif" />
     </div>
@@ -50,7 +79,7 @@
   ?>
 
     <!-- Formulario de acceso-->
-	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/accesofinal.gif') repeat scroll center center / 100% 100%; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
+	<form id="formu" name="form" action="acceso.php" method="post" style="background: url('rsc/img/accesofinal.gif'); background-repeat: no-repeat; background-position: center center; background-attachment: scroll; background-size: 100% 100%; height: auto; width: auto; border-radius: 15px; text-align: center; z-index: 1000; display: block;" align="center">
       <a href="javascript:cerrarAcc()" style="float: right; font-family: 'mejor'; color: black; text-decoration: none; background-color: white; border-radius: 50%; width: 15px">X</a>
       <h1 style="margin-top: 5px; font-family: 'mejor'; font-size: 60px">Acceso:</h1>
 	    <input style="background-color: transparent; width: 80%; font-size: 30px" placeholder="Correo" required name="email" type="email" value="" style="" /><br><br>
