@@ -53,24 +53,24 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav" style="text-align: center">
+          <li class="nav-item">
+            <a class="nav-link" href="categorias.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">CATEGORíAS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="categorias.php">CATEGORíAS</a>
+            <a class="nav-link" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black; cursor: pointer;" onclick="acceso()">AcceSO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black" href="registro.php">RegiSTRO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 20px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black; " href="recuperar.php">RecupeRAR ConTRAseÑA</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <div id="imglogo" align="center">
+    <div id="imglogo" align="center" style="position: relative;">
     	<img id="logo" src="rsc/img/acceso.gif" />
     </div>
     
@@ -102,6 +102,10 @@
     $("#imglogo").click(function(){
         $("#formu").toggle();
     });
+
+    function acceso(){
+      $("#formu").toggle();
+    }
 
     function formato(i) {
         if (i < 10) {i = "0" + i};
