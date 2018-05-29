@@ -43,7 +43,7 @@
 			    	$consulta = mysqli_query($connect, "SELECT * FROM usuarios WHERE id_usuario = '".$valor2["id_usuario"]."';");
 			    	$usu = mysqli_fetch_assoc($consulta);
 
-			        echo "<tr><td align='center' id='".$valor2["id_subcategoria"]."'><a href='view_post.php?post=".$valor2["titulo"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".substr($valor2["contenido"], 0, 100)."...</td><td align='center'>".$usu["alias"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
+			        echo "<tr><td align='center' id='".$valor2["id_subcategoria"]."'><a href='view_post.php?post=".$valor2["id_post"]."'>" .$valor2["titulo"]. "</a></td><td align='center'>".substr($valor2["contenido"], 0, 100)."...</td><td align='center'>".$usu["alias"]. "</td><td align='center'>".$valor2["fecha_subida"]. "</td></tr>";
 			    }
 			} else {
 			    echo "<tr><td colspan='4' align='center'>No hay posts para esta subcategoría. ¡¿A qué esperas?! ¡Ilústranos!</td></tr>";

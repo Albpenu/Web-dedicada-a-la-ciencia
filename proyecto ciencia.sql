@@ -78,7 +78,7 @@ TRUNCATE table votos;
 TRUNCATE TABLE votos;
 DELETE FROM votos WHERE id_voto = 2;
 
-SELECT * FROM categorias;
+SELECT * FROM posts;
 
 ALTER TABLE votos ADD id_post INT;
 

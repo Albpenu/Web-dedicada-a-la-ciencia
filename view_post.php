@@ -29,11 +29,13 @@
             <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style="right: 0px">Salir</a></span>
             <?php
                 include('conexion.php');
-                $consulta = mysqli_query($connect, "SELECT * FROM posts WHERE titulo LIKE '".$_GET['post']."';");
+                $consulta = mysqli_query($connect, "SELECT * FROM posts p JOIN usuarios u ON u.id_usuario=p.id_usuario WHERE id_post LIKE '".$_GET['post']."';");
                 $post = mysqli_fetch_assoc($consulta);
                 $video = substr($post['video'], strpos($post['video'], "=") + 1);
             ?>
             <h1><?php echo utf8_decode($post['titulo']); ?></h1>
+            <p>Subido por: <?php echo("<b>".$post['alias']."</b>"); ?></p>
+            <p>Fecha de subida: <?php echo("<b>".$post['fecha_subida']."</b>"); ?></p>
             <label><?php echo utf8_decode($post['contenido'])."<br>"; ?></label>
             <?php
                 echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="300"/><br>';
@@ -58,16 +60,17 @@
                 $idu = mysqli_query($connect, "SELECT id_usuario FROM usuarios WHERE alias='".$_SESSION['usuario']."';");
                 $idusu = mysqli_fetch_array($idu);
 
-                $id = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_usuario='".$idusu[0]."';");
+                $id = mysqli_query($connect, "SELECT count(id_voto) FROM votos WHERE id_usuario='".$idusu[0]."' AND id_post = '".$post['id_post']."';");
                 $idxpost = mysqli_fetch_array($id);
 
                 if($_POST['puntos'] >= 1){
-
+                    //var_dump($_POST['puntos']);
+                    //var_dump($idusu[0]);
                     if (count($idusu[0])==1 && $idxpost[0]==0) {
                         mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
                             echo "<br>".count($idusu[0]);
 
-                    } elseif ($idxpost[0]>=1) {
+                    } elseif (count($idusu[0])==1 && $idxpost[0]>=1) {
                         ?>
                         <script type="text/javascript">
                             alert('¡<?php echo $_SESSION['usuario']; ?>, sólo puedes votar una vez!');
@@ -80,9 +83,15 @@
                         </script>
                         <?php
                     }
+                } elseif ($_POST['puntos'] == 'Puntuación') {
+                    ?>
+                    <script type="text/javascript">
+                        alert('¡Esto no es una puntuación!');
+                    </script>
+                    <?php
                 } else {
                     //Cuando no clicas o vacío
-                    }
+                }
                 
 
                 $consulta = mysqli_query($connect, "SELECT avg(valor) FROM votos WHERE id_post = '".$post['id_post']."';");

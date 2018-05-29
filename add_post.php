@@ -39,7 +39,7 @@
 
 				if (isset($_SESSION['email'])) {
 
-					$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, imagen, video, fecha_subida) VALUES (NULL, '".$idsubcat[0]."', '".$idusu[0]."', '$titulo', '$descripcion', '$imagenpost', '$video', 'now()');") or die(mysqli_error($connect));
+					$sql = mysqli_query($connect, "INSERT INTO posts (id_post, id_subcategoria, id_usuario, titulo, contenido, imagen, video, fecha_subida) VALUES (NULL, '".$idsubcat[0]."', '".$idusu[0]."', '$titulo', '$descripcion', '$imagenpost', '$video', 'NOW()');") or die(mysqli_error($connect));
 
 					if ($sql) {
 						echo "<script>alert('¡Publicación realizada!');</script>";
