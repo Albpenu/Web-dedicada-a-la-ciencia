@@ -141,25 +141,29 @@
 			<h1>Insertar subcategoría:</h1>
 			<label>¿A qué categoría se la vas a añadir? Selecciónala:</label>
 		<form action="admin_consultas.php" method="POST">
-			<br><input type="radio" name="categoria" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSelecc(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
-			<label id="subcat"></label>
+			<br><input type="radio" name="cat_add" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catAdd(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
+			<input type="radio" name="cat_add" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catAdd(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
+			<input type="radio" name="cat_add" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catAdd(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
+			<label id="subcatadd"></label>
 		</form>
 	</div>
 
-	<!--Eliminar subcategoría
 	<div style="float: left; clear: both;">
+			<?php
+				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
+				$nombre2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
+				$nombre3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
+			?>
 			<h1>Eliminar subcategoría:</h1>
 			<label>¿A qué categoría pertenece? Selecciónala:</label>
 		<form action="admin_consultas.php" method="POST">
-			<br><input type="radio" name="categoria2" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria2" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
-			<input type="radio" name="categoria2" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catSel(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
-			<label id="subcat2"></label>
+			<br><input type="radio" name="cat_remove" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
+			<input type="radio" name="cat_remove" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
+			<input type="radio" name="cat_remove" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
+			<label id="subcatremove"></label>
 		</form>
 	</div>
--->
+
 	<script type="text/javascript">
         function showHidePass(){
             var pass = document.getElementById("pass");
@@ -180,24 +184,28 @@
         	alert('Eliminado 😉👍');
         }
 
-        function catSelecc(categoria){
-        	var catselecc = categoria.value;
-        	document.getElementById('subcat').innerHTML = "<?php echo "<br><label>¿Qué nombre y descripción va a tener?</label><br><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' required /><input name='desubcat' type='text' placeholder='Descripción' required /><input type='submit' name='add2' value='Añadir'>"; ?>";
+        function catAdd(cat_add){
+        	var catselecc = cat_add.value;
+        	document.getElementById('subcatadd').innerHTML = "<?php echo "<br><label>¿Qué nombre y descripción va a tener?</label><br><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' required /><input name='desubcat' type='text' placeholder='Descripción' required /><input type='submit' name='add2' value='Añadir'>"; ?>";
         }
-/*
-        function catSelecc2(categoria2){
-        	var catselecc = categoria.value;
-        	document.getElementById('subcat2').innerHTML = "<br><label>¿Cuál es el nombre de la subcategoría que quieres eliminar? Selecciónalo:</label><br><br><select name='nsubcat'><?php
-			$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$_POST['categoria2']."';");
-			while ($nsubcat = mysqli_fetch_array($consulta)) {
-				echo "<option>".$nsubcat[0]."</option>";
-			}
-			echo "</select><input type='submit' name='remove2' value='Eliminar' onclick='remove()'>"; ?>";
+//REVISAR FALLO:
+        function catRemove(cat_remove){
+        	var catselecc = cat_remove.value;
+
+        	document.getElementById('subcatremove').innerHTML = "<br><label>¿Cuál es el nombre de la subcategoría que quieres eliminar? Selecciónalo:</label><br><br><select name='nsubcat'>";
+        	<?php
+        		$id = mysqli_query($connect, "SELECT id_categoria FROM categorias WHERE nombre_categoria LIKE '".$_POST['cat_remove']."';");
+        		$idcat = mysqli_fetch_array($id);
+				$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$idcat[0]."';");
+				while ($nsubcat = mysqli_fetch_array($consulta)) {
+					echo "<option>".$nsubcat[0]."</option>";
+				}
+				echo "</select><input type='submit' name='remove2' value='Eliminar' onclick='remove()'>";
+			?>
+				
         }
-*/
+
     </script>
-    <?php
-    ?>
 </body>
 
 </html>

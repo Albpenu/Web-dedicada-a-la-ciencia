@@ -79,6 +79,8 @@ TRUNCATE TABLE votos;
 DELETE FROM votos WHERE id_voto = 2;
 
 SELECT * FROM posts;
+USE ciencia;
+SELECT * FROM usuarios;
 
 ALTER TABLE votos ADD id_post INT;
 

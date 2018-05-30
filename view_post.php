@@ -32,9 +32,13 @@
                 $consulta = mysqli_query($connect, "SELECT * FROM posts p JOIN usuarios u ON u.id_usuario=p.id_usuario WHERE id_post LIKE '".$_GET['post']."';");
                 $post = mysqli_fetch_assoc($consulta);
                 $video = substr($post['video'], strpos($post['video'], "=") + 1);
+//VOTOS y SABIDURIA del usuario del post:
+                /*if () {
+                    mysqli_query($connect, "SELECT avg() FROM votos v JOIN usuarios u ON u.id_usuario=v.id_usuario WHERE id_usuario = '".$post['id_usuario']."';");
+                }*/
             ?>
             <h1><?php echo utf8_decode($post['titulo']); ?></h1>
-            <p>Subido por: <?php echo("<b>".$post['alias']."</b>"); ?></p>
+            <p>Subido por: <?php echo("<b>".$post['alias']."</b><br><label>(".$post['sabiduria'].")</label>"); ?></p>
             <p>Fecha de subida: <?php echo("<b>".$post['fecha_subida']."</b>"); ?></p>
             <label><?php echo utf8_decode($post['contenido'])."<br>"; ?></label>
             <?php
