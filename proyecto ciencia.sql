@@ -81,6 +81,7 @@ DELETE FROM votos WHERE id_voto = 2;
 SELECT * FROM posts;
 USE ciencia;
 SELECT * FROM usuarios;
+DELETE FROM posts WHERE id_post = 19;
 
 ALTER TABLE votos ADD id_post INT;
 

@@ -33,9 +33,18 @@
                 $post = mysqli_fetch_assoc($consulta);
                 $video = substr($post['video'], strpos($post['video'], "=") + 1);
 //VOTOS y SABIDURIA del usuario del post:
-                /*if () {
-                    mysqli_query($connect, "SELECT avg() FROM votos v JOIN usuarios u ON u.id_usuario=v.id_usuario WHERE id_usuario = '".$post['id_usuario']."';");
-                }*/
+                $consulta = mysqli_query($connect, "SELECT avg(valor), count(id_post) FROM votos v WHERE v.id_usuario='".$post['id_usuario']."';");
+                $sabiduria = mysqli_fetch_array($consulta);
+
+                $consulta = mysqli_query($connect, "SELECT count(id_post) FROM posts WHERE id_usuario = '".$post['id_usuario']."';");
+                $cant_post = mysqli_fetch_array($consulta);
+
+                echo round($sabiduria[0], 2);
+                echo "<br>".$cant_post[0];
+                
+                if ($cant_post[0]==1 && round($sabiduria[0], 2)<=5) {
+                    mysqli_query($connect, "UPDATE usuarios SET sabiduria='Es su primerita vez' WHERE id_usuario = '".$post['id_usuario']."';");
+                } //ADD EL RESTO!!!
             ?>
             <h1><?php echo utf8_decode($post['titulo']); ?></h1>
             <p>Subido por: <?php echo("<b>".$post['alias']."</b><br><label>(".$post['sabiduria'].")</label>"); ?></p>
