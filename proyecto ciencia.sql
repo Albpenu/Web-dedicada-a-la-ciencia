@@ -83,6 +83,12 @@ USE ciencia;
 SELECT * FROM usuarios;
 DELETE FROM posts WHERE id_post = 19;
 
+/*SELECT avg(valor) FROM votos v JOIN usuarios u ON u.id_usuario=v.id_usuario JOIN posts p ON p.id_usuario=u.id_usuario WHERE v.id_usuario=10; */
+SELECT avg(valor) FROM votos v WHERE v.id_usuario=1;
+SELECT count(id_post) FROM posts WHERE id_usuario =11;
+
 ALTER TABLE votos ADD id_post INT;
+
+UPDATE usuarios SET sabiduria='Es su primerita vez';
 
 ALTER TABLE votos ADD CONSTRAINT foreign key fk (id_post) REFERENCES posts (id_post) ON delete CASCADE ON UPDATE cascade;

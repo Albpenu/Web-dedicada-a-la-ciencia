@@ -15,11 +15,19 @@
 	<meta charset="utf-8" />
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
 </head>
-<body>	
+<body>
+	<form action="" method="get">
+        <input type="text" name="buscador" placeholder="¡Búsquelo!">
+        <input type="submit">
+    </form>
+
 	<h1 style="border-bottom: 1px solid black;"><?php echo 'Categoría: "'.$_GET['categoria'].'"<div style="display: inline-block; float: right;" id="add"></div>'; ?></h1>
 	<h1 style="text-decoration: underline;">Subcategorías: </h1>
 
 		<?php
+			//BUSCADOR
+			$_GET['buscador'];
+			mysqli_query($connect, "SELECT * FROM posts WHERE nombre_subcategoria LIKE '%".$_GET['categoria']."%'");
 
 			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
