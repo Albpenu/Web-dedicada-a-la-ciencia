@@ -17,9 +17,9 @@
         <div id="imgperfil" style="float: right;">
             <?php
             if (isset($_SESSION['usuario'])) {
-            //$extension = strtolower(substr($_SESSION["nombreimg"], strpos($_SESSION["nombreimg"], '.') + 1));
+
             echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
-            //echo '<img src="data:image/'.$extension.';base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+
             } else {
             }
             
@@ -39,8 +39,6 @@
                 $consulta = mysqli_query($connect, "SELECT count(id_post) FROM posts WHERE id_usuario = '".$post['id_usuario']."';");
                 $cant_post = mysqli_fetch_array($consulta);
 
-                echo round($sabiduria[0], 2);
-                echo "<br>".$cant_post[0];
                 //REVISAR
                 if ($cant_post[0]<=5 && round($sabiduria[0], 2)<=5) {
                     mysqli_query($connect, "UPDATE usuarios SET sabiduria='Es su primerita vez' WHERE id_usuario = '".$post['id_usuario']."';");
@@ -87,8 +85,7 @@
                 $idxpost = mysqli_fetch_array($id);
 
                 if($_POST['puntos'] >= 1){
-                    //var_dump($_POST['puntos']);
-                    //var_dump($idusu[0]);
+
                     if (count($idusu[0])==1 && $idxpost[0]==0) {
                         mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
                             echo "<br>".count($idusu[0]);

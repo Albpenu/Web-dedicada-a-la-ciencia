@@ -3,7 +3,6 @@
 	include('conexion.php');
 	$cat = mysqli_query($connect, "SELECT id_categoria FROM categorias WHERE nombre_categoria = '".$_GET['categoria']."';");
 	$cateleg = mysqli_fetch_assoc($cat);
-	var_dump($cateleg['id_categoria']);
 	$_SESSION['id_cat'] = $cateleg['id_categoria'];
 	$sql = "SELECT * FROM subcategorias WHERE id_categoria = '".$_SESSION['id_cat']."';";
 	$resultado = $connect->query($sql) or die(mysqli_error($connect));
@@ -16,19 +15,15 @@
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
 </head>
 <body>
-	<form action="" method="get">
-        <input type="text" name="buscador" placeholder="¡Búsquelo!">
-        <input type="submit">
+	<form action="busqueda.php" method="get" height='100px' style="display: flex; align-items: center;">
+        <input type="text" name="busqueda" placeholder="¿Te interesa un post en concreto?">
+        <input name="enviar" type="image" src="rsc/img/search.gif" width="100px">
     </form>
 
 	<h1 style="border-bottom: 1px solid black;"><?php echo 'Categoría: "'.$_GET['categoria'].'"<div style="display: inline-block; float: right;" id="add"></div>'; ?></h1>
 	<h1 style="text-decoration: underline;">Subcategorías: </h1>
 
 		<?php
-			//BUSCADOR
-			$_GET['buscador'];
-			mysqli_query($connect, "SELECT * FROM posts WHERE nombre_subcategoria LIKE '%".$_GET['categoria']."%'");
-
 			if ((mysqli_num_rows($resultado)>0)) {
 			    while($valor = mysqli_fetch_assoc($resultado)) {
 			        echo "<a style='text-decoration: none;' href='view_subcat.php?subcat=".$valor["nombre_subcategoria"]."'><h2 style='display: inline-block; background-color: yellow;'>".$valor["nombre_subcategoria"]."</h2></a><br><label>***".$valor["descripcion"]."***</label><br><label>".$valor["fecha_ultima_actualizacion"]."</label>";

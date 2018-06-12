@@ -10,11 +10,18 @@
 	<title>Categorías</title>
   <meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
-	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script> 
 </head>
 
 <body onload="horario()">
-
+  <style type="text/css">
+    @font-face {
+        font-family: 'sciencefair';
+        src: url('fonts/Science Fair.otf') format('opentype');
+    }
+  </style>
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
   <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
@@ -35,8 +42,25 @@
   <?php
 
     $fecha = date('d/m/Y');
-    echo "<p style='color: white;'>".$fecha.", <label id='hora'></label></p>";
+    echo "<p style='color: white; padding-top: 15px;'>".$fecha.", <label id='hora'></label></p>";
   ?>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #436A6C !important">
+      <a class="navbar-brand" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 50px;">CULTO A LA CIENCIA</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav" style="text-align: center">
+          <li class="nav-item">
+            <a class="nav-link" href="categorias.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">CATEGORíAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 20px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">VOLVER A LA PáGINA DE INICIO</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
   <div id="categorias" align="center">
 

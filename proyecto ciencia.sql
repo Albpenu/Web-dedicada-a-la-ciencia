@@ -89,6 +89,10 @@ SELECT count(id_post) FROM posts WHERE id_usuario =11;
 
 ALTER TABLE votos ADD id_post INT;
 
+ALTER TABLE usuarios CHANGE alias alias VARCHAR(100);
+ALTER TABLE usuarios CHANGE contrasenia contrasenia VARCHAR(100);
+ALTER TABLE usuarios CHANGE sabiduria sabiduria VARCHAR(100);
+
 UPDATE usuarios SET sabiduria='Es su primerita vez';
 
 ALTER TABLE votos ADD CONSTRAINT foreign key fk (id_post) REFERENCES posts (id_post) ON delete CASCADE ON UPDATE cascade;
