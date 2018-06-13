@@ -62,8 +62,6 @@
       </div>
     </nav>
 
-  <div id="categorias" align="center">
-
   <?php
   $nombreydesc1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
   $id1 = mysqli_fetch_assoc($nombreydesc1);
@@ -77,8 +75,8 @@
 	$fechacat = mysqli_query($connect, "SELECT fecha_ultima_actualizacion FROM categorias WHERE id_categoria = '".$idcat."';");
 	$fcat = mysqli_fetch_array($fechacat); 
 	 ?>
-  <div id="categorias">
-  	<div>
+  <div class="categorias">
+  	<div id="cat1">
       <a href="posts.php?categoria=<?php echo $id1['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
     		<img style="display: block; position: relative;" src="rsc/img/1.gif" width="300" alt="<?php 
         echo $id1['nombre_categoria'];
@@ -92,7 +90,7 @@
   		</div>
   	</div>
 
-  	<div>
+  	<div id="cat2">
       <a href="posts.php?categoria=<?php echo $id2['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
     		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/2.gif" width="300" alt="<?php 
         echo $id2['nombre_categoria'];
@@ -106,7 +104,7 @@
   		</div>	
   	</div>
 
-  	<div>
+  	<div id="cat3">
       <a href="posts.php?categoria=<?php echo $id3['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer; ">
     		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/3.gif" width="300" alt="<?php 
         echo $id3['nombre_categoria'];
@@ -147,58 +145,58 @@
       var t = setTimeout(horario, 500);
     }
     //ACORDEON DE CATEGORIAS
-    $("div#categorias > div > div#categoria1 > label#desccat1").hide();
-    $("div#categorias > div > div#categoria2 > label#desccat2").hide();
-    $("div#categorias > div > div#categoria3 > label#desccat3").hide();
+    $("div.categorias > div > div#categoria1 > label#desccat1").hide();
+    $("div.categorias > div > div#categoria2 > label#desccat2").hide();
+    $("div.categorias > div > div#categoria3 > label#desccat3").hide();
         
     $("img#imgcategoria1").click(function() {
-        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
+        $("div.categorias > div > div#categoria1 > label#desccat1").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
+        $("div.categorias > div > div#categoria2 > label#desccat2").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
+        $("div.categorias > div > div#categoria3 > label#desccat3").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria1").css("background-color", "#01E4AD");
+        $("div.categorias > div > div#categoria1").css("background-color", "#01E4AD");
         $(this).css("border-radius", "0%");
     });
 
     $("img#imgcategoria2").click(function() {
-        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
+        $("div.categorias > div > div#categoria2 > label#desccat2").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
+        $("div.categorias > div > div#categoria1 > label#desccat1").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
+        $("div.categorias > div > div#categoria3 > label#desccat3").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria2").css("background-color", "#01E4AD");
+        $("div.categorias > div > div#categoria2").css("background-color", "#01E4AD");
         $(this).css("border-radius", "0%");
     });
 
     $("img#imgcategoria3").click(function() {
-        $("div#categorias > div > div#categoria3 > label#desccat3").animate({
+        $("div.categorias > div > div#categoria3 > label#desccat3").animate({
             height: "toggle"
         }, 1500);
 
-        $("div#categorias > div > div#categoria2 > label#desccat2").animate({
+        $("div.categorias > div > div#categoria2 > label#desccat2").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria1 > label#desccat1").animate({
+        $("div.categorias > div > div#categoria1 > label#desccat1").animate({
             height: "hide"
         }, 1500);
 
-        $("div#categorias > div > div#categoria3").css("background-color", "#01E4AD");
+        $("div.categorias > div > div#categoria3").css("background-color", "#01E4AD");
         $(this).css("border-radius", "0%");
     });
   </script>

@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -38,7 +37,22 @@ nav ul li {
     list-style: none;
 }
 
-/* Por debajo de 1000px */
+div.categorias {
+    display: flex;
+    width: 945px;
+    margin: auto;
+    text-align: center;
+}
+
+#cat1, #cat2 {
+    padding-right: 15px;
+}
+
+div#categoria1, #categoria2, #categoria3 {
+    width: 300px;
+}
+
+/* 1000px o mas */
 @media screen and (min-width: 1000px){
     
     @media screen and (orientation:landscape){
@@ -49,14 +63,26 @@ nav ul li {
             margin-right: 15px;
         }
     }
-
-    div#categorias>div {
-        float: left; 
-        margin-right: 25px;
-    } 
 }
 
-div#categorias {
-    display: flex;
-    justify-content: center;
+a.navbar-brand {
+    font-family: 'sciencefair'; 
+    text-shadow: 3px 3px black; 
+    color: #E9A56D; 
+    font-size: 50px;
+}
+/* 438px o menos */
+@media screen and (max-width: 438px){
+    a.navbar-brand { 
+        font-size: 30px !important;
+    }   
+}
+/* 928px o menos */
+@media screen and (max-width: 928px){
+    div.categorias {
+        width: 300px;
+        display: block;
+        margin: 0px auto;
+    }
+        
 }

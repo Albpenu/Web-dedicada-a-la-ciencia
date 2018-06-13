@@ -17,6 +17,7 @@
 </head>
 <body onload="horario()">
   <style type="text/css">
+    
     @font-face {
         font-family: 'sciencefair';
         src: url('fonts/Science Fair.otf') format('opentype');
@@ -83,15 +84,8 @@
 	    <input style="background-color: transparent; width: 80%; font-size: 30px" placeholder="Contraseña" required name="password" type="password" value=""/><br>
         <input name="remember" type="checkbox" value="rememberYES"><label style="color: blue; font-size: 40px">Recuérdame</label><br>
         <input type="submit" style="background-color: transparent; font-size: 40px" name="enviar" value="Entrar"/><br>
-        <a style="font-size: 30px" href="registro.php">¿No estás registrado?</a><br>
-        <a style="font-size: 30px" href="olvidado.php">¿Has olvidado tu contraseña?</a>
+        <a style="font-size: 30px" href="registro.php">¿No estás registrado?</a>
 	</form>
-
-  <nav></nav>
-
-	<aside></aside>
-
-	<aside></aside>
 
 	<script type="text/javascript">
     $("#formu").hide();
