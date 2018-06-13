@@ -56,7 +56,7 @@
             <a class="nav-link" href="categorias.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">CATEGORíAS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 20px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">VOLVER A LA PáGINA DE INICIO</a>
+            <a class="nav-link" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">INICIO</a>
           </li>
         </ul>
       </div>
@@ -77,10 +77,9 @@
 	$fechacat = mysqli_query($connect, "SELECT fecha_ultima_actualizacion FROM categorias WHERE id_categoria = '".$idcat."';");
 	$fcat = mysqli_fetch_array($fechacat); 
 	 ?>
-  	
-  	<div style="float: left; margin-right: 25px;">
+  <div id="categorias">
+  	<div>
       <a href="posts.php?categoria=<?php echo $id1['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
-      <!---->
     		<img style="display: block; position: relative;" src="rsc/img/1.gif" width="300" alt="<?php 
         echo $id1['nombre_categoria'];
         ?>">
@@ -93,7 +92,7 @@
   		</div>
   	</div>
 
-  	<div style="float: left; margin-right: 25px;">
+  	<div>
       <a href="posts.php?categoria=<?php echo $id2['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">
     		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/2.gif" width="300" alt="<?php 
         echo $id2['nombre_categoria'];
@@ -107,7 +106,7 @@
   		</div>	
   	</div>
 
-  	<div style="float: left;">
+  	<div>
       <a href="posts.php?categoria=<?php echo $id3['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer; ">
     		<img style="cursor: pointer; display: block; position: relative;" src="rsc/img/3.gif" width="300" alt="<?php 
         echo $id3['nombre_categoria'];

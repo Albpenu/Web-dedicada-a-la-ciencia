@@ -47,7 +47,7 @@
 
   ?>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #436A6C !important">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 50px;">CULTO A LA CIENCIA</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -62,9 +62,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black" href="registro.php">RegiSTRO</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 20px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black; " href="recuperar.php">RecupeRAR ConTRAseÑA</a>
           </li>
         </ul>
       </div>
