@@ -57,7 +57,42 @@
             if (isset($_SESSION['usuario'])) {
 
             echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+            $consulta = mysqli_query($connect, "SELECT * FROM usuarios WHERE alias LIKE '".$_SESSION['usuario']."'");
+            $saber = mysqli_fetch_assoc($consulta);
 
+            
+            echo "<br><span id='saber'></span>";
+                if ($saber['sabiduria']=='Es su primerita vez') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Ya ha hecho sus pinitos en este mundillo') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Sabe cositas') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Progresa Adecuadamente') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='En la cresta de la ola') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/>';
+                    </script>
+                    <?php
+                }
             } else {
             }
             
@@ -99,48 +134,50 @@
                 } elseif ($cant_post[0]>=15 && round($sabiduria[0], 2)>4) {
                     mysqli_query($connect, "UPDATE usuarios SET sabiduria='En la cresta de la ola' WHERE id_usuario = '".$post['id_usuario']."';");
                 }
-                //ESTRELLAS X SABIDURIA
+                
+
+            ?>
+
+            <h1 id="titulo" style="font-size: 50px"><?php echo $post['titulo']; ?></h1>
+            <p style="text-decoration: underline;">Fecha de subida: <?php echo("<b>".$post['fecha_subida']."</b>"); ?></p>
+            <p style="text-decoration: underline;">Subido por:</p> <div style="margin-left: 25px; margin-bottom: 15px; font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black; background-color: #436A6C !important; width: 350px; text-align: center;"><?php echo("<br><b>".$post['alias']."</b><br><span id='nivel'></span><br><b style='padding-left: 0px !important;'>(".$post['sabiduria'].")</b>"); ?></div>
+            <label><?php echo $post['contenido']."<br>"; ?></label>
+            <div align="center">
+                <?php
+                    echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="500"/><br>';
+
+                    //ESTRELLAS X SABIDURIA
                 if ($post['sabiduria']=='Es su primerita vez') {
                     ?>
                     <script type="text/javascript">
-                        getElementById('nivel')
+                        document.getElementById('nivel').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
                     </script>
                     <?php
                 } elseif ($post['sabiduria']=='Ya ha hecho sus pinitos en este mundillo') {
                     ?>
                     <script type="text/javascript">
-                        
+                        document.getElementById('nivel').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
                     </script>
                     <?php
                 } elseif ($post['sabiduria']=='Sabe cositas') {
                     ?>
                     <script type="text/javascript">
-                        
+                        document.getElementById('nivel').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
                     </script>
                     <?php
                 } elseif ($post['sabiduria']=='Progresa Adecuadamente') {
                     ?>
                     <script type="text/javascript">
-                        
+                        document.getElementById('nivel').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
                     </script>
                     <?php
                 } elseif ($post['sabiduria']=='En la cresta de la ola') {
                     ?>
                     <script type="text/javascript">
-                        
+                        document.getElementById('nivel').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/>';
                     </script>
                     <?php
                 }
-
-            ?>
-
-            <h1 id="titulo" style="font-size: 50px"><?php echo $post['titulo']; ?></h1>
-            <p>Fecha de subida: <?php echo("<b>".$post['fecha_subida']."</b>"); ?></p>
-            <p>Subido por: <?php echo("<b>".$post['alias']."</b><br><label>(".$post['sabiduria'].")</label>"); ?><div id="nivel"></div></p>
-            <label><?php echo $post['contenido']."<br>"; ?></label>
-            <div align="center">
-                <?php
-                    echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="500"/><br>';
                 ?>
                 <iframe type="text/html" width="500" height="350"
                 src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe>

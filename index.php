@@ -36,14 +36,48 @@
     <?php
 
     if (isset($_SESSION['usuario'])) {
-      //$extension = strtolower(substr($_SESSION["nombreimg"], strpos($_SESSION["nombreimg"], '.') + 1));
       echo '<img id="imgperfil" src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
-      //echo '<img src="data:image/'.$extension.';base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
-    } else {
-     }
-     
-    ?>
-  </div>
+      $consulta = mysqli_query($connect, "SELECT * FROM usuarios WHERE alias LIKE '".$_SESSION['usuario']."'");
+            $saber = mysqli_fetch_assoc($consulta);
+
+            
+            echo "<br><span id='saber'></span>";
+                if ($saber['sabiduria']=='Es su primerita vez') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Ya ha hecho sus pinitos en este mundillo') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Sabe cositas') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='Progresa Adecuadamente') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/1.png" width="20"/>';
+                    </script>
+                    <?php
+                } elseif ($saber['sabiduria']=='En la cresta de la ola') {
+                    ?>
+                    <script type="text/javascript">
+                        document.getElementById('saber').innerHTML ='<img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/><img src="rsc/img/STARS/9.png" width="20"/>';
+                    </script>
+                    <?php
+                }
+            } else {
+            }
+            
+            ?>
+        </div>
   <span style="float: right; right: 0; padding: 0px; padding-top: 15px; clear: both;">
   <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style=" margin-right: 10px">Salir</a></span>
   <?php

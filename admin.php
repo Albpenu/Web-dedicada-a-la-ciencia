@@ -5,6 +5,16 @@
 	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> 
 	<style type="text/css">
+
+		body{
+			background: url("./rsc/img/the_martian.jpg"); 
+		    background-repeat: no-repeat;
+		    background-position: center center;
+		    background-position-y: 30px;
+		    background-attachment: fixed;
+		    background-size: 100% 100%;
+		}
+
 		tbody tr:nth-child(odd){
 		    background: #eac633;
 		}
@@ -18,7 +28,7 @@
 	<?php
 		include('conexion.php');
 		//$connect->query("SET NAMES 'utf8'");
-		echo "<div style='float: right; text-align: center'>Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a></div>";
+		echo "<div style='float: right; text-align: center; color: blue; font-size: 20px'>Volvamos a casa:<br> <a href='index.php'><img class='option' src='rsc/img/house.png' /></a></div>";
 		session_start();
 
 	    if(!isset($_SESSION['acceso'])) {
@@ -26,18 +36,51 @@
 	        die('<h1>¿Todavía sigues aquí? Vete a casita, anda</h1>');
 	    }
 	?>
+	<!--Posts-->
+	<form name="form" action="admin_consultas.php" method="POST">
+		<h1>Eliminar post:</h1>
+		<input type="number" name="idpost" placeholder="Id del post"><br>
+		<input type="submit" name="remove0" value="Eliminar">
+	</form>
+	<?php
+		$sql = "SELECT * FROM posts;";
+		$resultado = $connect->query($sql) or die(mysqli_error($connect));
+
+	?>
+		<h1>Todos los posts:</h1>
+		<table border="1px solid black" cellspacing="0">
+			<thead style="background-color: #4d8cf2;">
+				<th>Id del Post</th>
+				<th>Titulo</th>
+				<th>Contenido</th>
+				<th>Id de usuario</th>
+				<th>Fecha de subida</th>
+			</thead>
+			<tbody>
+	<?php
+
+		if (mysqli_num_rows($resultado)>0) {
+		    while($valor = mysqli_fetch_assoc($resultado)) {
+		        echo "<tr><td align='center'>".$valor["id_post"]. "</td><td align='center'>" .$valor["titulo"]. "</td><td align='center'>" .$valor["contenido"]. "</td><td align='center'>".$valor["id_usuario"]. "</td><td align='center'>" .$valor["fecha_subida"]. "</td></tr>";
+		    }
+		} else {
+		    echo "<tr><td colspan='5' align='center'>0 resultados</td></tr>";
+		}
+	?>
+			</tbody>
+		</table>
 	<!--Usuarios-->
 	<form name="form" action="admin_consultas.php" method="POST">
 		<h1>Actualizar contraseña de usuario:</h1>
 		<input type="number" name="idusu" placeholder="Id de usuario"><br>
 		<input type="password" name="pass" id="pass" placeholder="Contraseña"> <input type="checkbox" name="comprobar" id="checkpass" onclick="showHidePass()"/><b>Mostrar contraseña</b><br>
-		<input type="submit" name="add1" value="Añadir" onclick="add()">
+		<input type="submit" name="add1" value="Añadir">
 	</form>
 	
 	<form name="form" action="admin_consultas.php" method="POST">
 		<h1>Eliminar usuario:</h1>
 		<input type="number" name="idusu" placeholder="Id de usuario">
-		<input type="submit" name="remove1" value="Eliminar" onclick="remove()">
+		<input type="submit" name="remove1" value="Eliminar">
 	</form>
 	<?php
 		$sql = "SELECT * FROM usuarios;";
@@ -149,20 +192,13 @@
 	</div>
 
 	<div style="float: left; clear: both;">
-			<?php
-				$nombre1 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 1;");
-				$nombre2 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 2;");
-				$nombre3 = mysqli_query($connect, "SELECT * FROM categorias WHERE id_categoria = 3;");
-			?>
+		<form name="form" action="admin_consultas.php" method="POST">
 			<h1>Eliminar subcategoría:</h1>
-			<label>¿A qué categoría pertenece? Selecciónala:</label>
-		<form action="admin_consultas.php" method="POST">
-			<br><input type="radio" name="cat_remove" value="<?php $idcat1=mysqli_fetch_assoc($nombre1); echo utf8_encode($idcat1['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat1['nombre_categoria']); ?><br>
-			<input type="radio" name="cat_remove" value="<?php $idcat2=mysqli_fetch_assoc($nombre2); echo utf8_encode($idcat2['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat2['nombre_categoria']); ?><br>
-			<input type="radio" name="cat_remove" value="<?php $idcat3=mysqli_fetch_assoc($nombre3); echo utf8_encode($idcat3['nombre_categoria']); ?>" onclick="catRemove(this)"> <?php echo utf8_encode($idcat3['nombre_categoria']); ?><br>
-			<label id="subcatremove"></label>
+			<input type="number" name="idsubcat" placeholder="Id de la subcategoría"><br>
+			<input type="submit" name="remove2" value="Eliminar">
 		</form>
 	</div>
+	
 
 	<script type="text/javascript">
         function showHidePass(){
@@ -176,35 +212,10 @@
             }
         }
 
-        function add(){
-        	alert('Contraseña actualizada 😉👍');
-        }
-
-        function remove(){
-        	alert('Eliminado 😉👍');
-        }
-
         function catAdd(cat_add){
         	var catselecc = cat_add.value;
         	document.getElementById('subcatadd').innerHTML = "<?php echo "<br><label>¿Qué nombre y descripción va a tener?</label><br><br><input name='nsubcat' type='text' placeholder='Nombre de la subcategoría' required /><input name='desubcat' type='text' placeholder='Descripción' required /><input type='submit' name='add2' value='Añadir'>"; ?>";
         }
-//REVISAR FALLO:
-        function catRemove(cat_remove){
-        	var catselecc = cat_remove.value;
-
-        	document.getElementById('subcatremove').innerHTML = "<br><label>¿Cuál es el nombre de la subcategoría que quieres eliminar? Selecciónalo:</label><br><br><select name='nsubcat'>";
-        	<?php
-        		$id = mysqli_query($connect, "SELECT id_categoria FROM categorias WHERE nombre_categoria LIKE '".$_POST['cat_remove']."';");
-        		$idcat = mysqli_fetch_array($id);
-				$consulta = mysqli_query($connect, "SELECT nombre_subcategoria FROM subcategorias WHERE id_categoria='".$idcat[0]."';");
-				while ($nsubcat = mysqli_fetch_array($consulta)) {
-					echo "<option>".$nsubcat[0]."</option>";
-				}
-				echo "</select><input type='submit' name='remove2' value='Eliminar' onclick='remove()'>";
-			?>
-				
-        }
-
     </script>
 </body>
 
