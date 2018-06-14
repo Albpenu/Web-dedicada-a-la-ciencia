@@ -3,8 +3,46 @@
     <head>
         <title></title>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script> 
     </head>
     <body>
+        <style type="text/css">
+            body{
+                background: url("./rsc/img/the_martian.jpg") !important; 
+                background-repeat: no-repeat !important;
+                background-position: center center !important;
+                background-position-y: 30px !important;
+                background-attachment: fixed !important;
+                background-size: 100% 100% !important;
+            }
+
+            @font-face {
+                font-family: 'sciencefair';
+                src: url('fonts/Science Fair.otf') format('opentype');
+            }
+
+            p, label {
+                color: white;
+                font-size: 20px;
+            }
+
+            #titulo, p, label {
+                padding-left: 15px;
+            }
+
+            a.nav-link {
+                background-color: #436A6C !important;
+                font-family: 'sciencefair';
+            }
+        </style>
+
+        <div height='100px' style="display: flex; align-items: center;">
+            <img onclick="volver()" src="rsc/img/volver.gif" width="100px" style="cursor: pointer;">
+            <h3 style="color: blue;">Volver a la página anterior</h3>
+        </div>
+
         <?php
             session_start();
             session_id();
@@ -14,7 +52,7 @@
         <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
         </br>
         
-        <div id="imgperfil" style="float: right;">
+        <div id="imgperfil" style="float: right; margin-top: -100px;">
             <?php
             if (isset($_SESSION['usuario'])) {
 
@@ -27,6 +65,17 @@
         </div>
         <span style="float: right; right: 0; padding: 0px; padding-top: 15px; clear: both;">
             <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style="right: 0px">Salir</a></span>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent !important">
+            <ul class="navbar-nav" style="text-align: center">
+              <li class="nav-item">
+                <a class="nav-link" href="categorias.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">CATEGORíAS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php" style="font-family: 'sciencefair'; text-shadow: 3px 3px black; color: #E9A56D; font-size: 30px; box-shadow: 0px 0px 0px 12px; margin: 5px black; border: 3px solid black;">INICIO</a>
+              </li>
+            </ul>
+        </nav>
             <?php
                 include('conexion.php');
                 $consulta = mysqli_query($connect, "SELECT * FROM posts p JOIN usuarios u ON u.id_usuario=p.id_usuario WHERE id_post LIKE '".$_GET['post']."';");
@@ -39,7 +88,6 @@
                 $consulta = mysqli_query($connect, "SELECT count(id_post) FROM posts WHERE id_usuario = '".$post['id_usuario']."';");
                 $cant_post = mysqli_fetch_array($consulta);
 
-                //REVISAR
                 if ($cant_post[0]<=5 && round($sabiduria[0], 2)<=5) {
                     mysqli_query($connect, "UPDATE usuarios SET sabiduria='Es su primerita vez' WHERE id_usuario = '".$post['id_usuario']."';");
                 } elseif ($cant_post[0]>=6 && $cant_post[0]<=10 && round($sabiduria[0], 2)>=2.5) {
@@ -51,18 +99,52 @@
                 } elseif ($cant_post[0]>=15 && round($sabiduria[0], 2)>4) {
                     mysqli_query($connect, "UPDATE usuarios SET sabiduria='En la cresta de la ola' WHERE id_usuario = '".$post['id_usuario']."';");
                 }
+                //ESTRELLAS X SABIDURIA
+                if ($post['sabiduria']=='Es su primerita vez') {
+                    ?>
+                    <script type="text/javascript">
+                        getElementById('nivel')
+                    </script>
+                    <?php
+                } elseif ($post['sabiduria']=='Ya ha hecho sus pinitos en este mundillo') {
+                    ?>
+                    <script type="text/javascript">
+                        
+                    </script>
+                    <?php
+                } elseif ($post['sabiduria']=='Sabe cositas') {
+                    ?>
+                    <script type="text/javascript">
+                        
+                    </script>
+                    <?php
+                } elseif ($post['sabiduria']=='Progresa Adecuadamente') {
+                    ?>
+                    <script type="text/javascript">
+                        
+                    </script>
+                    <?php
+                } elseif ($post['sabiduria']=='En la cresta de la ola') {
+                    ?>
+                    <script type="text/javascript">
+                        
+                    </script>
+                    <?php
+                }
 
             ?>
 
-            <h1><?php echo utf8_decode($post['titulo']); ?></h1>
-            <p>Subido por: <?php echo("<b>".$post['alias']."</b><br><label>(".$post['sabiduria'].")</label>"); ?></p>
+            <h1 id="titulo" style="font-size: 50px"><?php echo $post['titulo']; ?></h1>
             <p>Fecha de subida: <?php echo("<b>".$post['fecha_subida']."</b>"); ?></p>
-            <label><?php echo utf8_decode($post['contenido'])."<br>"; ?></label>
-            <?php
-                echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="300"/><br>';
-            ?>
-            <iframe type="text/html" width="420" height="315"
-            src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe><br>
+            <p>Subido por: <?php echo("<b>".$post['alias']."</b><br><label>(".$post['sabiduria'].")</label>"); ?><div id="nivel"></div></p>
+            <label><?php echo $post['contenido']."<br>"; ?></label>
+            <div align="center">
+                <?php
+                    echo '<img src="data:image/jpeg;base64,'.base64_encode($post['imagen']).'" width="500"/><br>';
+                ?>
+                <iframe type="text/html" width="500" height="350"
+                src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe>
+            <br>
             <form method="POST">
                 <h1>Vota:</h1>
                 <select name="puntos">
@@ -88,8 +170,11 @@
 
                     if (count($idusu[0])==1 && $idxpost[0]==0) {
                         mysqli_query($connect, "INSERT INTO votos (id_voto, valor, id_usuario, id_post) VALUES (NULL,'".$_POST['puntos']."', '".$idusu[0]."', '".$post['id_post']."');");
-                            echo "<br>".count($idusu[0]);
-
+                        ?>
+                        <script type="text/javascript">
+                            alert('¡Gracias por tu voto, <?php echo $_SESSION['usuario']; ?>  😉👍!');
+                        </script>
+                        <?php
                     } elseif (count($idusu[0])==1 && $idxpost[0]>=1) {
                         ?>
                         <script type="text/javascript">
@@ -167,9 +252,13 @@
             }
             
             ?>
+            </div>
             <script type="text/javascript">
-            document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
-            document.getElementById("usuario").innerHTML = '<?php session_start(); echo $_SESSION['usuario']." "; echo $_SESSION['imagenperfil']; ?>';
+                function volver(){
+                    window.history.back();
+                }
+                document.getElementById("acceso").innerHTML = '<?php echo "Hola "; ?>';
+                document.getElementById("usuario").innerHTML = '<?php session_start(); echo $_SESSION['usuario']." "; echo $_SESSION['imagenperfil']; ?>';
             </script>   
         </body>
     </html>

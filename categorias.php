@@ -23,26 +23,28 @@
     }
   </style>
   <b style="top: 0; left: 0">Correo de contacto: <u><a href="#">cultoalaciencia@gmail.com</a></u></b>
-  <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
+  <span style="top: 0; right: 0; float: right; position: absolute; padding: 8px; padding-bottom: 5px"><b id="acceso" ></b><a id="usuario" href='#'>Usuario</a></span>
   </br>
   
   <div id="imgperfil" style="float: right;">
     <?php
 
     if (isset($_SESSION['usuario'])) {
-      echo '<img src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+      //$extension = strtolower(substr($_SESSION["nombreimg"], strpos($_SESSION["nombreimg"], '.') + 1));
+      echo '<img id="imgperfil" src="data:image/jpeg;base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
+      //echo '<img src="data:image/'.$extension.';base64,'.base64_encode($_SESSION['imagendeperfil']).'" width="100"/>';
     } else {
      }
      
     ?>
   </div>
   <span style="float: right; right: 0; padding: 0px; padding-top: 15px; clear: both;">
-  <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style="right: 0px">Salir</a></span>
- 
+  <a href='cerrarsesion.php' title='Cerrar sesión' id="salir" style=" margin-right: 10px">Salir</a></span>
   <?php
 
     $fecha = date('d/m/Y');
     echo "<p style='color: white; padding-top: 15px;'>".$fecha.", <label id='hora'></label></p>";
+
   ?>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #436A6C !important">
@@ -75,6 +77,9 @@
 	$fechacat = mysqli_query($connect, "SELECT fecha_ultima_actualizacion FROM categorias WHERE id_categoria = '".$idcat."';");
 	$fcat = mysqli_fetch_array($fechacat); 
 	 ?>
+
+  <b id="dificultad">CATEGORíAS SEGúN SU NIVEL de DIFICULTAD:</b>
+
   <div class="categorias">
   	<div id="cat1">
       <a href="posts.php?categoria=<?php echo $id1['nombre_categoria']; ?>" style="outline: none;"><div style="display: block; position: relative; width: 300px; cursor: pointer;">

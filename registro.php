@@ -6,10 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery-3.2.1.min.js"></script>
-    <title></title>
+    <title>Registro</title>
 </head>
-
-<body style="background-image: url('rsc/img/fondo.png'); background-repeat: no-repeat; background-size: cover;">
+<body>
+    <style type="text/css">
+        body{
+            background: url("./rsc/img/the_martian.jpg"); 
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-position-y: 30px;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+    <div height='100px' style="display: flex; align-items: center;">
+        <img onclick="volver()" src="rsc/img/volver.gif" width="100px" style="cursor: pointer;">
+        <h3 style="color: blue;">Volver a la página anterior</h3>
+    </div>
     <!-- Formulario de registro-->
     	<form name="form" action="registro_db.php" method="post" enctype="multipart/form-data">
             <fieldset style="width: 40%; color: white; background: url('rsc/img/registro.gif') repeat scroll center center / 100% 100%; border-radius: 15px; z-index: 1000; display: block;">
@@ -25,6 +38,11 @@
     	</form>
         
     <script type="text/javascript">
+        
+        function volver(){
+            window.history.back();
+        }
+
         $(document).ready(function(){
             $("#registrarse").click(function(){
                 var nombre_imagen = $("#imagenperfil").val();

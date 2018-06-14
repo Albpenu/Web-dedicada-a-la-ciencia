@@ -86,3 +86,13 @@ a.navbar-brand {
     }
         
 }
+
+#imgperfil {
+    padding-top: 11px;
+}
+
+b#dificultad {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}

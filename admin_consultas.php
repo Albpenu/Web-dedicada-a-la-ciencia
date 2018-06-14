@@ -27,8 +27,13 @@
 		} else {}
 
 		if (isset($remove1)) {
-			$consulta = mysqli_query($connect, "DELETE * FROM usuarios WHERE id_usuario = '$idusuario';") or die(mysqli_error($connect));
-	        //header('location: admin.php');
+			$consulta = mysqli_query($connect, "DELETE FROM usuarios WHERE id_usuario = '$idusuario';") or die(mysqli_error($connect));
+			?>
+	        <script type="text/javascript">
+	        	alert('Usuario eliminado');
+	        </script>
+	        <?php
+	        header('location: admin.php');
 		} else {
 
 		}
